@@ -1,0 +1,21 @@
+page-home {
+   
+}
+
+
+.ios ion-navbar{
+    margin-top: 10px;
+}
+
+ion-title{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ion-searchbar{
+    width: 80%;
+    margin-left: 10%;
+}
+// Comando para esconder o scroll bar
+::-webkit-scrollbar { display:none; }
+

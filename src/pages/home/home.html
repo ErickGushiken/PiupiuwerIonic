@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-searchbar></ion-searchbar>
+  
+    <ion-buttons end>
+      <button ion-button icon-only (click)="irParaTeste()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding scroll="false">
+  <ion-card>
+    <p>Dia Atual {{horarioAtual|date}}</p>
+    <!-- Input de um novo post -->
+    <form (ngSubmit)="criaPost()">
+      <ion-item>
+        <ion-input [(ngModel)]="conteudoPost" name="conteudoPost" type="string"></ion-input>
+      </ion-item>
+      <ion-row justify-content-center>
+        <button ion-button type="submit" class="postar">Postar</button>
+      </ion-row>
+    </form>
+  </ion-card>
+
+  <!-- Apresentação dos outros posts -->
+  <ion-list>
+    <ion-card *ngFor="let post of posts" >
+
+
+  <ion-item (click)="selecionaUsuario(post)">
+    <ion-avatar item-start>
+      <img src="../../assets/imgs/your_picture.png">
+    </ion-avatar>
+    <h2>{{post.usuario}}</h2>
+    <p>{{post.data|date}}</p>
+  </ion-item>
+
+  
+
+  <ion-card-content>
+    <ion-item (click)="calculaTempoRelativo(post)">
+      <p>{{post.conteudo}}</p>
+    </ion-item>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-start clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>"number" Likes</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-start clear small>
+        <ion-icon name="star"></ion-icon>
+        <div>Favorite</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+        "11h ago"
+      </ion-note>
+    </ion-col>
+  </ion-row>
+
+</ion-card>
+</ion-list>
+
+</ion-content>

@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!-- Formulario de Login -->
+<ion-content id="conteudo" scroll="false">
+  <div padding>
+  <form (ngSubmit)="efetuaLogin()">
+    <ion-item>
+      <ion-label stacked>Usuário</ion-label>
+      <ion-input [(ngModel)]="username" name="username" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Senha</ion-label>
+      <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+    </ion-item>
+    <button ion-button block type="submit" class="login">Entrar</button>
+    </form>
+  </div>
+
+  <!-- Redirecionamento para página de cadastro -->
+  <p>Ainda não tem uma conta ? Faça seu cadastro.</p>
+  <ion-row justify-content-center>
+    <button id="cadastroButton" ion-button (click)="irParaPagina(CadastroPage)">
+      Cadastro
+    </button>
+  </ion-row>
+  
+</ion-content>
+

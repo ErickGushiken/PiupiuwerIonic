@@ -1,0 +1,7 @@
+{
+  "name": "piupiuwer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
