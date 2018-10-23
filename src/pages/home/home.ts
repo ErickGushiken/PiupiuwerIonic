@@ -57,7 +57,11 @@ export class HomePage {
       this.navCtrl.push(CadastroPage);
     }
 
+<<<<<<< HEAD
+
+=======
    
+>>>>>>> fdc3cd09272f7fd559062ca952abaae9c5f3f139
 
     // Função para criar um post
     criaPost(){
