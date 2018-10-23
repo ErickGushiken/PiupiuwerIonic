@@ -18,7 +18,8 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
-
+// Integração com o WhatsApp
+import { SocialSharing} from '@ionic-native/social-sharing';
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-post-service';
@@ -52,6 +53,7 @@ import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-
     UsuariosServiceProvider,
     CadastroServiceProvider,
     CriarPostServiceProvider,
+    SocialSharing,
 
     
   ]
