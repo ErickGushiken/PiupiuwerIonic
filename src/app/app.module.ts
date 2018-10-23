@@ -26,6 +26,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-post-service';
+import { AutorServiceProvider } from '../providers/autor-service/autor-service';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-
     CadastroServiceProvider,
     CriarPostServiceProvider,
     SocialSharing,
+    AutorServiceProvider,
 
     
   ]

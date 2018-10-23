@@ -13,4 +13,6 @@ export class CriarPostServiceProvider {
       console.log("estou no provider criando um post")
     }
 
+    
+
 }
