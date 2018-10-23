@@ -14,7 +14,6 @@ $app-direction: ltr;
 
 @import "ionic.globals";
 
-
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
@@ -45,14 +44,14 @@ $colors: (
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
+$background-ios-color: #f5f5f5;
 
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
+$background-md-color: #f5f5f5;
 
 
 
