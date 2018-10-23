@@ -20,6 +20,9 @@ import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
 // Integração com o WhatsApp
 import { SocialSharing} from '@ionic-native/social-sharing';
+// Display de tempo relativo
+import {TimeAgoPipe} from 'time-ago-pipe';
+
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-post-service';
@@ -31,6 +34,7 @@ import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-
     UserPage,
     CadastroPage,
     LoginPage,
+    TimeAgoPipe,
 
   ],
   imports: [
