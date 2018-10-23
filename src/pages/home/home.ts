@@ -6,6 +6,7 @@ import { Post } from '../../modelos/post';
 import { UserPage } from '../user/user';
 import { CadastroPage } from '../cadastro/cadastro';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { AutorServiceProvider } from '../../providers/autor-service/autor-service';
 
 
 @Component({
@@ -17,24 +18,29 @@ export class HomePage {
   
 
   public posts:Post[];
-  // public horarioAtual=new Date();
+  public post:Post;
+ 
   
 
   constructor(public navCtrl: NavController,
     private _http: HttpClient,
-    private socialSharing: SocialSharing,) {
+    private socialSharing: SocialSharing,
+    private _autorService:AutorServiceProvider,) {
     this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
     .subscribe(
       (posts) =>{
         this.posts = posts;
+        // this.posts.forEach(post => {
+        //   post.procuraAutor();
+        // });
       }
     );
+    
+
     }
     //Função para selecionar o piu
     selecionaPost(post: Post){
       console.log("OLA");
-      // console.log("HorarioAtual",this.horarioAtual.toISOString());
-      console.log("horario do post",post.data);
       console.log(post.conteudo);
       this.navCtrl.push(UserPage);
 
@@ -44,13 +50,18 @@ export class HomePage {
       console.log(post.usuario);
       console.log("fechou");
       this.navCtrl.push(UserPage);
+      // this._autorService
     }
 
     irParaTeste(){
       this.navCtrl.push(CadastroPage);
     }
 
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> fdc3cd09272f7fd559062ca952abaae9c5f3f139
 
     // Função para criar um post
     criaPost(){
@@ -65,6 +76,6 @@ export class HomePage {
       console.log("compartilhei");
     }
 
-
+    
   }
 
