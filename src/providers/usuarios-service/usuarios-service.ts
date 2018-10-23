@@ -17,7 +17,6 @@ export class UsuariosServiceProvider {
     return this._http.post<Usuario>('http://piupiuwer.polijunior.com.br/api/login/',{username,password})
     .do((usuario:Usuario)=> this._usuarioLogado = usuario);
   }
-
   obtemUsuarioLogado(){
     return this._usuarioLogado;
   }
