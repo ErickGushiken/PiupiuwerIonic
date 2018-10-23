@@ -13,11 +13,11 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  conteudoPost:string="Hello world";
+  conteudoPost:string="";
   
 
   public posts:Post[];
- 
+  // public horarioAtual=new Date();
   
 
   constructor(public navCtrl: NavController,
