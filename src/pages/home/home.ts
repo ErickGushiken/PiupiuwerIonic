@@ -17,8 +17,7 @@ export class HomePage {
   
 
   public posts:Post[];
-  // horarioAtual=Date.now();
-  horarioAtual=new Date();
+ 
   
 
   constructor(public navCtrl: NavController,
@@ -34,7 +33,7 @@ export class HomePage {
     //Função para selecionar o piu
     selecionaPost(post: Post){
       console.log("OLA");
-      console.log("HorarioAtual",this.horarioAtual.toISOString());
+      // console.log("HorarioAtual",this.horarioAtual.toISOString());
       console.log("horario do post",post.data);
       console.log(post.conteudo);
       this.navCtrl.push(UserPage);
@@ -54,8 +53,10 @@ export class HomePage {
     // Função para calcular o tempo relativo
     calculaTempoRelativo(post:Post){
       console.log("tempo relativo");
-      console.log(post.data);
-      console.log( Date.parse(this.horarioAtual.toISOString()));
+      var horarioAtual=new Date();
+      var horarioAtualValue=Date.parse(horarioAtual);
+      var horarioPostValue=Date.parse(new Date(post.data).toISOString());
+      console.log(new Date(horarioAtualValue-horarioPostValue));
     }
 
     // Função para criar um post
@@ -68,6 +69,7 @@ export class HomePage {
     compartilhaWhats(post:Post){
       var msg = post.conteudo;
       this.socialSharing.shareViaWhatsApp(msg,null,null);
+      console.log("compartilhei");
     }
 
 

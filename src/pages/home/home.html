@@ -54,19 +54,19 @@
   <ion-row>
     <ion-col>
       <button ion-button icon-start clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>"number" Likes</div>
+        <ion-icon name="star"></ion-icon>
+        <div> Favoritar</div>
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button icon-start clear small>
-        <ion-icon name="star"></ion-icon>
-        <div>Favorite</div>
+      <button ion-button icon-start clear small (click)="compartilhaWhats(post)">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <div>WhatsApp</div>
       </button>
     </ion-col>
     <ion-col center text-center>
       <ion-note>
-        "11h ago"
+        <p>{{post.data|timeAgo}}</p>
       </ion-note>
     </ion-col>
   </ion-row>
