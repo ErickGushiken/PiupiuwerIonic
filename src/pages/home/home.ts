@@ -50,14 +50,7 @@ export class HomePage {
       this.navCtrl.push(CadastroPage);
     }
 
-    // Função para calcular o tempo relativo
-    calculaTempoRelativo(post:Post){
-      console.log("tempo relativo");
-      var horarioAtual=new Date();
-      var horarioAtualValue=Date.parse(horarioAtual);
-      var horarioPostValue=Date.parse(new Date(post.data).toISOString());
-      console.log(new Date(horarioAtualValue-horarioPostValue));
-    }
+
 
     // Função para criar um post
     criaPost(){
