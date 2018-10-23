@@ -5,6 +5,7 @@ import { HttpClient} from '@angular/common/http';
 import { Post } from '../../modelos/post';
 import { UserPage } from '../user/user';
 import { CadastroPage } from '../cadastro/cadastro';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 
 @Component({
@@ -18,9 +19,11 @@ export class HomePage {
   public posts:Post[];
   // horarioAtual=Date.now();
   horarioAtual=new Date();
+  
 
   constructor(public navCtrl: NavController,
-    private _http: HttpClient) {
+    private _http: HttpClient,
+    private socialSharing: SocialSharing,) {
     this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
     .subscribe(
       (posts) =>{
@@ -59,6 +62,12 @@ export class HomePage {
     criaPost(){
       console.log("entrei na função criaPost dentro de home.ts")
       console.log(this.conteudoPost);
+    }
+
+    // Função para compartilhar no whats
+    compartilhaWhats(post:Post){
+      var msg = post.conteudo;
+      this.socialSharing.shareViaWhatsApp(msg,null,null);
     }
 
 
