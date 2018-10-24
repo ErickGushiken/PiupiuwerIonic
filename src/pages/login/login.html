@@ -1,17 +1,23 @@
 
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
+  
 
 </ion-header>
 <!-- Formulario de Login -->
 <ion-content id="conteudo" scroll="false">
-    <ion-avatar item-center>
-        <img src="../assets/imgs/erickGushiken.jpeg">
-    </ion-avatar>
-
+  <div class="headerBackground"></div>
+  <div class="headerInfo">
+    <ion-row id="logoRow" justify-content-center>
+      <img id="piupiuwerLogo" src="../../assets/imgs/piupiuwer_logo_color.png">
+      <h1>Piupiuwer</h1>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-avatar>
+          <img src="../assets/imgs/erickGushiken.jpeg">
+      </ion-avatar>
+    </ion-row>
+  </div>
   <!-- Formulario de Login -->
   <div padding>
   <form (ngSubmit)="efetuaLogin()">
@@ -28,7 +34,7 @@
   </div>
 
   <!-- Redirecionamento para página de cadastro -->
-  <p>Ainda não tem uma conta ? Faça seu cadastro.</p>
+  <p id="semConta">Ainda não tem uma conta ? Faça seu cadastro.</p>
   <ion-row justify-content-center>
     <button id="cadastroButton" ion-button (click)="irParaPagina(CadastroPage)">
       Cadastro
