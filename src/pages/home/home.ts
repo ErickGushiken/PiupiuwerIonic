@@ -19,17 +19,22 @@ export class HomePage {
 
   public posts:Post[];
   public post:Post;
+  public postDateOrder:Post[];
  
   
 
   constructor(public navCtrl: NavController,
     private _http: HttpClient,
     private socialSharing: SocialSharing,
-    private _autorService:AutorServiceProvider,) {
+    // private _autorService:AutorServiceProvider,
+    ) {
     this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
     .subscribe(
       (posts) =>{
         this.posts = posts;
+        console.log("ola",this.posts);
+        posts.sort((d1,d2)=> new Date(d2.data).getTime()-new Date(d1.data).getTime());
+        console.log("kkk",posts)
         // this.posts.forEach(post => {
         //   post.procuraAutor();
         // });

@@ -2,6 +2,7 @@
 p,h1{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    color: black;
 }
 h1{
     color: rgb(145, 145, 145);
@@ -13,16 +14,17 @@ ion-avatar img {
     width:150px;
     height: 150px;
 }
-.conteudo{
-    margin-top: 10vh;
+#conteudo{
+    // margin-top: 10vh;
     display: flex !important;
     align-content: center!important;
+    background-color:rgb(145, 145, 145) !important;
 }
 #piupiuwerLogo{
     width: 50px;
     height: auto;
 }
-#logoRow,#semConta{
+#logoRow{
     margin: 4vh;
 }
 .headerBackground {
@@ -45,4 +47,23 @@ ion-avatar img {
         margin-top: -280px;
         text-align: center;
 }
+#loginFormulario{
+    margin-top: 10px;
+    background-color: rgb(145, 145, 145);
+    border-radius: 10px;
+    ion-item{
+        background: rgba(255,255,255,0.4) !important;
+        
+    };
+
+    #usuarioItem{
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    };
+    #senhaItem{
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+}
+
 

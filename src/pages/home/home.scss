@@ -5,6 +5,7 @@ ion-card{
     border-radius: 5px !important;
 }
 
+
 .ios ion-navbar{
     margin-top: 10px;
 }
@@ -14,9 +15,15 @@ ion-title{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-ion-searchbar{
-    width: 80%;
-    margin-left: 10%;
+
+
+.searchbar-md .searchbar-input{
+    border-radius: 15px;
+    border: 0 !important;
+    box-shadow: none !important;
+    background-color: rgb(226, 225, 225) !important;
+    width: 90%;
+    margin-left: 5%;
 }
 // Comando para esconder o scroll bar
 ::-webkit-scrollbar {
@@ -55,6 +62,5 @@ ion-searchbar{
 ion-row{
     align-items: center;
 }
-
 
 
