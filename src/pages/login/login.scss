@@ -4,7 +4,7 @@ p,h1{
     font-family: Arial, Helvetica, sans-serif;
 }
 h1{
-    color: white;
+    color: rgb(145, 145, 145);
 }
 
 ion-avatar img {
@@ -27,12 +27,12 @@ ion-avatar img {
 }
 .headerBackground {
     position: relative;
-    background: url('../../assets/imgs/abstract.jpg') no-repeat transparent;
+    background: url('../assets/imgs/abstract.jpg') no-repeat transparent;
     background-size: cover;
     height: 40%;
     z-index: 1;
-    background-repeat: repeat-x;
-    animation: animatedBackground 40s linear infinite;
+    background-repeat: repeat;
+    animation: animatedBackground 7s linear infinite;
 }
 
 @keyframes animatedBackground {
