@@ -15,7 +15,6 @@ ion-avatar img {
     height: 150px;
 }
 #conteudo{
-    // margin-top: 10vh;
     display: flex !important;
     align-content: center!important;
     background-color:rgb(145, 145, 145) !important;
@@ -48,22 +47,32 @@ ion-avatar img {
         text-align: center;
 }
 #loginFormulario{
-    margin-top: 10px;
+    
+    color: black !important;
+    margin-top: 5vh;
     background-color: rgb(145, 145, 145);
     border-radius: 10px;
     ion-item{
         background: rgba(255,255,255,0.4) !important;
+        padding-right: 10px;
         
     };
-
+    ion-input{
+        width: 90%;
+    }
+    ion-label{
+        color: black;
+    }
     #usuarioItem{
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     };
     #senhaItem{
+        margin-bottom: 2vh;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
+
 }
 
 

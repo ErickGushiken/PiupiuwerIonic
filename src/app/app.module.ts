@@ -22,7 +22,8 @@ import 'rxjs/add/observable/of';
 import { SocialSharing} from '@ionic-native/social-sharing';
 // Display de tempo relativo
 import {TimeAgoPipe} from 'time-ago-pipe';
-
+// Salvar token
+import { IonicStorageModule} from '@ionic/storage';
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-post-service';
@@ -41,7 +42,8 @@ import { AutorServiceProvider } from '../providers/autor-service/autor-service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
