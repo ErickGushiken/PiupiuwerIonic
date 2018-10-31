@@ -22,7 +22,9 @@ ion-title{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
+ion-text-area{
+    resize: none !important;
+}
 
 .searchbar-md .searchbar-input{
     border-radius: 15px;
@@ -36,8 +38,9 @@ ion-title{
 ::-webkit-scrollbar {
     display:none;
 }
+
 .formCard{
-    height: 20vh;
+    min-height: 20vh !important;
     margin-left: auto;
     margin-right: auto;
 }
@@ -74,8 +77,12 @@ ion-row{
     };
 
 }
-.highlight_blue{
-    background-color: aquamarine !important;
+.bordaAzul{
+    box-shadow: 0 0 5px 4px rgba(0, 238, 255, 0.3);
+}
+
+.bordaVermelha{
+    box-shadow: 0 0 5px 4px rgba(255, 8, 0, 0.3);
 }
 
 

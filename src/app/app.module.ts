@@ -42,7 +42,10 @@ import { AutorServiceProvider } from '../providers/autor-service/autor-service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false} ),
     IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],

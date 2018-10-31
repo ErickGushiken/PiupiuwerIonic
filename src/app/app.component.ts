@@ -19,7 +19,10 @@ export class MyApp {
 
   // Define as paginas que podem ser acessadas do menu
   public paginas = [
-    {titulo : "Meu Perfil", componente: UserPage, icone:'person',}
+    {titulo : "Meu Perfil", componente: UserPage, icone:'person',},
+
+    {titulo : "Sair", componente: UserPage, icone:'log-out',}
+
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

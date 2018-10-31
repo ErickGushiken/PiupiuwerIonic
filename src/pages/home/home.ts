@@ -25,7 +25,7 @@ export class HomePage {
   public postDateOrder:Post[];
 
   public novoPostInput = document.querySelector('.formPostInput');
-  private _alerta:Alert;
+  
 
   constructor(public navCtrl: NavController,
     public loadingCtrl:LoadingController,
@@ -34,6 +34,7 @@ export class HomePage {
     private socialSharing: SocialSharing,
     private _postService:PostServiceProvider,
     private _usuarioService:UsuariosServiceProvider,
+    
     ) 
     {
       this.carregandoAnimaçao();
@@ -42,7 +43,7 @@ export class HomePage {
       console.log("SOU O CONTADOR",this.novoPostInput);
       setTimeout(()=>{
         this.carregando.dismiss();
-      },10000);
+      },1000);
       
       
     }
@@ -118,24 +119,33 @@ export class HomePage {
       contador.innerHTML="<p>"+num_palavras+" /140 caracteres </p>";
       // Altera os estilos / aviso conforme o contador
         if(num_palavras==140){
-          novoPostCard.classList.add("highlight_blue");}
+          novoPostCard.classList.add("bordaAzul");
+        }else if(num_palavras>140){
+          novoPostCard.classList.remove("bordaAzul");
+          novoPostCard.classList.add("bordaVermelha");
+        }else{
+          novoPostCard.classList.remove("bordaAzul");
+          novoPostCard.classList.remove("bordaVermelha");
+        }
   
   }
     
     // Função para criar um post
     criaPost(){
-      this._alertCtrl.create({
-        title: 'Aviso',
-        buttons:[
-          {text:'ok'}
-        ]});
+      
       console.log("entrei na função criaPost dentro de home.ts")
       console.log(this.conteudoPost);
       let post={
         conteudo:this.conteudoPost,
         usuario:this._usuarioService.id,
-      }
-
+      };
+      if(post.conteudo.length>140 || post.conteudo.length==0){
+        this._alertCtrl.create({
+          title:"Ocorreu um problema",
+          subTitle:"Verifique sua mensagem",
+          buttons:[{text:"ok"}]
+        }).present();
+      }else{
       this._postService.criaPost(post).then(
         
         ()=>{
@@ -149,11 +159,13 @@ export class HomePage {
       },()=>{
         // No caso de erro
         console.log("deu ruim");
-        this._alerta.setSubTitle("Ocorreu um erro");
-        this._alerta.present();
-
+        this._alertCtrl.create({
+          title:"Ocorreu um problema",
+          subTitle:"Verifique sua conexão com a internet",
+          buttons:[{text:"ok"}]
+        }).present();
       });
-    
+    }
 
       
       // MODELO ANTIGO

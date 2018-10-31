@@ -35,7 +35,9 @@ export class UsuariosServiceProvider {
         console.log("CRYSTAL",JWT(resposta['token'])['user_id']);
         this.token = resposta['token'];
         this.id=JWT(resposta['token'])['user_id'];
+        
         this.storage.set('token',resposta['token']);
+        console.log("OLHAAAA O TOKEN",this.token);
         resolve(resposta);
       },(erro)=>{
         reject(erro);

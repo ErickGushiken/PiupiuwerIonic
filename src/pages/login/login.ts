@@ -79,7 +79,7 @@ export class LoginPage {
   }
 
   irParaPagina(){
-    this.navCtrl.setRoot(CadastroPage);
+    this.navCtrl.push(CadastroPage);
   }
 
   carregandoAnimaçao(){

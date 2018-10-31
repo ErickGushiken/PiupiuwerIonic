@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuariosServiceProvider } from '../usuarios-service/usuarios-service';
 import * as moment from "moment";
 import { Usuario } from '../../modelos/usuario';
@@ -18,14 +18,10 @@ export class PostServiceProvider {
 
 
   constructor(private _http: HttpClient,
-    public usuarioService:UsuariosServiceProvider
+    public usuarioService:UsuariosServiceProvider,
     
     ) {
-      // Criar as variaveis para autenticação
-      this.headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization':'JWT '+this.usuarioService.token,
-      });
+     
       
   
   }
@@ -74,6 +70,14 @@ export class PostServiceProvider {
 
 
   criaPost(conteudo){
+    console.log("SOU O TOKEN ANTES DA REQUISIÇÂO",this.usuarioService.token);
+    // Criar as variaveis para autenticação
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':'JWT '+this.usuarioService.token,
+    });
+
+
     console.log("entrei na criaPost");
     return new Promise((resolve,reject)=>{
       console.log('SOU O HEADER',this.headers);

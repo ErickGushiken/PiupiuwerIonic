@@ -10,7 +10,7 @@
 
 <ion-content scroll="false">
 
-  <form (ngSubmit)="efetuaCadastro()">
+  <form class="cadastroForm" (ngSubmit)="efetuaCadastro()">
     <ion-label stacked>Nome:</ion-label>
     <ion-input [(ngModel)]="nome" name="nome"></ion-input>
   
@@ -21,7 +21,7 @@
     <ion-input [(ngModel)]="username" name="nomeUsuario"></ion-input>
 
     <ion-label stacked>Senha:</ion-label>
-    <ion-input [(ngModel)]="password" name="senha"></ion-input>
+    <ion-input [(ngModel)]="password" type="password" name="senha"></ion-input>
   
     <ion-label stacked>Email:</ion-label>
     <ion-input [(ngModel)]="email" name="email"></ion-input>

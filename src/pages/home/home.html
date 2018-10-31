@@ -16,6 +16,11 @@
 </ion-header>
 
 <ion-content padding scroll="false">
+  <!-- Implementação do sistema pull-to-refresh nativo -->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
   <ion-card class="formCard">
     
     <!-- Input de um novo post -->
