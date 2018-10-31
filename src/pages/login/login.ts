@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
 import { Usuario } from '../../modelos/usuario';
 import { CadastroPage } from '../cadastro/cadastro';
+import { PostServiceProvider } from '../../providers/post-service/post-service';
 
 
 /**
@@ -29,6 +30,8 @@ export class LoginPage {
     private _alertCtrl:AlertController,
     private _usuariosService:UsuariosServiceProvider,
     public loadingCtrl:LoadingController,
+    private _postService:PostServiceProvider,
+  
     
     ) {
 
@@ -43,6 +46,7 @@ export class LoginPage {
     .efetuaLogin(this.username,this.password)
     .then((resposta)=>{
       console.log(resposta);
+      
       this.carregando.dismiss();
       this.navCtrl.setRoot(HomePage);
     },

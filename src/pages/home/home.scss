@@ -3,6 +3,13 @@ ion-card{
     margin: 0 !important;
     margin-bottom: 1rem !important;
     border-radius: 5px !important;
+    
+}
+ion-item{
+    align-items: flex-start !important;
+    p{
+        text-align: justify;
+    }
 }
 
 
@@ -60,7 +67,15 @@ ion-title{
     width: auto;
 }
 ion-row{
-    align-items: center;
+    align-items: baseline;
+    vertical-align: middle !important;
+    h2{
+        padding-top: 0.8rem;
+    };
+
+}
+.highlight_blue{
+    background-color: aquamarine !important;
 }
 
 

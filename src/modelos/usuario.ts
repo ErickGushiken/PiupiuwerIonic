@@ -4,4 +4,6 @@ export interface Usuario{
     email: string;
     username: string;
     password:string;
+    id:number;
+    foto_perfil:URL;
 }

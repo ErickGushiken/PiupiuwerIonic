@@ -20,7 +20,7 @@ export class CadastroPage {
 
   public nome: string = '';
   public sobrenome: string = '';
-  public username: string ="Erick_Gushiken";
+  public username: string ="";
   public email: string = '';
   public password:string ="";
 

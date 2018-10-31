@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../../modelos/usuario';
 import{ Storage } from '@ionic/storage';
 import * as JWT from 'jwt-decode';
 
@@ -8,6 +7,8 @@ import * as JWT from 'jwt-decode';
 @Injectable()
 export class UsuariosServiceProvider {
   token:any;
+  usuario:string;
+  id:number;
 
 
   constructor(private _http: HttpClient, public storage: Storage,) {
@@ -33,6 +34,7 @@ export class UsuariosServiceProvider {
         console.log(JWT(resposta['token']));
         console.log("CRYSTAL",JWT(resposta['token'])['user_id']);
         this.token = resposta['token'];
+        this.id=JWT(resposta['token'])['user_id'];
         this.storage.set('token',resposta['token']);
         resolve(resposta);
       },(erro)=>{

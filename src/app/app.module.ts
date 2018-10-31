@@ -26,7 +26,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 import { IonicStorageModule} from '@ionic/storage';
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
-import { CriarPostServiceProvider } from '../providers/criar-post-service/criar-post-service';
+import { PostServiceProvider } from '../providers/post-service/post-service';
 import { AutorServiceProvider } from '../providers/autor-service/autor-service';
 
 @NgModule({
@@ -59,7 +59,7 @@ import { AutorServiceProvider } from '../providers/autor-service/autor-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuariosServiceProvider,
     CadastroServiceProvider,
-    CriarPostServiceProvider,
+    PostServiceProvider,
     SocialSharing,
     AutorServiceProvider,
 

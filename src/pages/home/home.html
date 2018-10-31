@@ -21,31 +21,31 @@
     <!-- Input de um novo post -->
     <form (ngSubmit)="criaPost()" class="formPost">
       <!-- <ion-item> -->
-        <ion-textarea rows=4 class="formPostInput" [(ngModel)]="conteudoPost" name="conteudoPost" type="string" placeholder="Escreva aqui..."></ion-textarea>
+        <ion-textarea rows=4 class="formPostInput" id="OLA" [(ngModel)]="conteudoPost" name="conteudoPost" type="string" placeholder="Escreva aqui..." (input)="contagemInput(conteudoPost)"></ion-textarea>
       <!-- </ion-item> -->
       <ion-row justify-content-center>
-        <p class="contador"> Contagem</p>
+        <p class="contador"></p>
         <button ion-button type="submit" class="formPostButton">Postar</button>
       </ion-row>
     </form>
   </ion-card>
 
   <!-- Apresentação dos outros posts -->
-  <ion-list>
-    <ion-card *ngFor="let post of posts">
+  <ion-list >
+    <ion-card *ngFor="let post of posts" >
 
-    <ion-row>
+    <ion-row class="postHeader" align-items-baseline>
   <ion-item (click)="selecionaUsuario(post)">
     <ion-avatar item-start>
       <img src="./assets/imgs/your_picture.png">
     </ion-avatar>
-    <h2>{{post.usuario}}</h2>
+    <h2>{{post.autor}}</h2>
   </ion-item>
   </ion-row>
   
 
   <ion-card-content>
-    <ion-item (click)="selecionaPost(post)">
+    <ion-item (click)="selecionaPost(post)" text-wrap>
       <p>{{post.conteudo}}</p>
     </ion-item>
   </ion-card-content>
@@ -65,7 +65,8 @@
     </ion-col>
     <ion-col center text-center>
       <ion-note>
-        <p>{{post.data|timeAgo}}</p>
+        <!-- <p>{{post.tempoRelativo}}</p> -->
+        <p>{{post.tempoRelativo}}</p>
       </ion-note>
     </ion-col>
   </ion-row>

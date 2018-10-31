@@ -4,4 +4,6 @@ export interface Post{
     conteudo:string;
     data:Date;
     usuario:number;
+    tempoRelativo:any;
+    autor:string;
 }
