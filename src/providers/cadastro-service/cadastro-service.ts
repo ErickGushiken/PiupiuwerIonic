@@ -11,10 +11,25 @@ export class CadastroServiceProvider {
 
     
   }
-
-  efetuaCadastro(username,password,first_name,last_name,email){
-    console.log(username,password,first_name,last_name,email);
-    return this._http.post<Usuario>('http://piupiuwer.polijunior.com.br/api/usuarios/registrar/',{username, password,first_name,last_name,email})
+  
+  efetuaCadastro(formulario){
+    console.log(formulario.value['username'],
+    formulario.value['password'],
+    formulario.value['last_name'],
+    formulario.value['first_name'],
+    formulario.value['email']);
+    var username = formulario.value['username'];
+    var password=formulario.value['password'];
+    var first_name=formulario.value['first_name'];
+    var last_name=formulario.value['last_name'];
+    var email=formulario.value['email'];
+    return this._http.post<Usuario>('http://piupiuwer.polijunior.com.br/api/usuarios/registrar/',
+      {username,
+       password,
+       first_name,
+       last_name,
+       email,
+    })
     .do((usuario:Usuario)=> this._usuarioLogado=usuario);
   }
 

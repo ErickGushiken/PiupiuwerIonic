@@ -27,7 +27,7 @@ import { IonicStorageModule} from '@ionic/storage';
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { PostServiceProvider } from '../providers/post-service/post-service';
-import { AutorServiceProvider } from '../providers/autor-service/autor-service';
+
 
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { AutorServiceProvider } from '../providers/autor-service/autor-service';
     CadastroServiceProvider,
     PostServiceProvider,
     SocialSharing,
-    AutorServiceProvider,
+    
 
     
   ]

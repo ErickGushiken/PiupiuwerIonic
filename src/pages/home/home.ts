@@ -26,6 +26,7 @@ export class HomePage {
 
   public novoPostInput = document.querySelector('.formPostInput');
   
+  
 
   constructor(public navCtrl: NavController,
     public loadingCtrl:LoadingController,
@@ -36,17 +37,23 @@ export class HomePage {
     private _usuarioService:UsuariosServiceProvider,
     
     ) 
+    
     {
-      this.carregandoAnimaçao();
-      // this._postService.obtemPius();
-      this.obtemPius();
-      console.log("SOU O CONTADOR",this.novoPostInput);
-      setTimeout(()=>{
-        this.carregando.dismiss();
-      },1000);
+
+      // this.carregandoAnimaçao();
+      // // this._postService.obtemPius();
+      // this.obtemPius();
+      // console.log("SOU O CONTADOR",this.novoPostInput);
+  
+      // setTimeout(()=>{
+      //   this.carregando.dismiss();
+      // },1000);
       
       
     }
+
+    
+
     obtemPius(){
 
       this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
@@ -55,30 +62,45 @@ export class HomePage {
           moment.locale('pt-BR');
           // Trata cada piu e adiciona informação do username e tempo relativo
           posts.forEach(post =>{
-            console.log("olar");
-            this._postService.adicionaAutor(post);
+            
             post.tempoRelativo=moment(post.data).fromNow();
-            console.log(post.tempoRelativo);
+            
+            // Para usar o .then a função adicionaAutor no serviço tinha que ser um Promise
+            this._postService.adicionaAutor(post)
+            .then(
+              ()=>{
+                this.posts = posts.reverse();
+                
+              });
+            
+            
           });
-          this.posts = posts.reverse();
-          console.log(posts);
+          console.log("Pius completos");
+          // this.posts = posts.reverse();
+          
+          
+          
+
           
         }
       );
                      
       }
     
-    // ionViewWillEnter() {
+    ionViewWillEnter() {
+      console.log("Estou no ionViewWillEnter");
+      this.carregando = this.loadingCtrl.create({
+        content: 'Preparando tudo...'
+      });
+      this.carregando.present();
+  
+      this.obtemPius();
+      setTimeout(()=>{
+        this.carregando.dismiss();
+      },5000);
+        };
 
-    //   this.carregando = this.loadingCtrl.create({
-    //     content: 'Preparando tudo...'
-    //   });
-  
-    //   this.carregando.present();
-  
-    //   this._postService.obtemPius();
-    //   this.carregando.dismiss();
-    //     };
+   
   
     
   
@@ -111,6 +133,27 @@ export class HomePage {
       console.log("compartilhei");
     }
 
+    // Função para deletar Post
+    deletaPost(post:Post){
+      console.log("Vou deletar / home.ts");
+      this._postService.deletaPost(post).then(
+        ()=>{
+          // No caso de sucesso
+          this.obtemPius();
+          console.log("ATUALIZANDO TUDO");
+          // this._postService.obtemPius();
+  
+        },()=>{
+          // No caso de erro
+          console.log("deu ruim");
+          
+        }
+      );
+      
+      
+    }
+
+
     // Função para contar palavras
     contagemInput(conteudo){
       var contador = document.querySelector('.contador');
@@ -132,7 +175,7 @@ export class HomePage {
     
     // Função para criar um post
     criaPost(){
-      
+      var contador = document.querySelector('.contador');
       console.log("entrei na função criaPost dentro de home.ts")
       console.log(this.conteudoPost);
       let post={
@@ -152,6 +195,7 @@ export class HomePage {
         // No caso de sucesso
         // Limpar os campos do input
         this.conteudoPost="";
+        contador.innerHTML="<p></p>";
         console.log("CRIADO");
         this.obtemPius();
         // this._postService.obtemPius();

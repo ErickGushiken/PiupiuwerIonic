@@ -20,8 +20,7 @@ export class MyApp {
   // Define as paginas que podem ser acessadas do menu
   public paginas = [
     {titulo : "Meu Perfil", componente: UserPage, icone:'person',},
-
-    {titulo : "Sair", componente: UserPage, icone:'log-out',}
+    {titulo : "Sair", componente: LoginPage, icone:'log-out',}
 
   ];
 
@@ -35,7 +34,11 @@ export class MyApp {
   }
 
   irParaPagina(componente){
+    if(componente=="LoginPage"){
+      this.nav.setRoot(componente);
+    }else{
     this.nav.push(componente);
+    }
   }
 }
 

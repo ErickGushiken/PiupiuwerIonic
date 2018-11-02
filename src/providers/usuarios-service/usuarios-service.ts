@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import{ Storage } from '@ionic/storage';
 import * as JWT from 'jwt-decode';
+import { Usuario } from '../../modelos/usuario';
 
 
 @Injectable()
@@ -9,6 +10,9 @@ export class UsuariosServiceProvider {
   token:any;
   usuario:string;
   id:number;
+  senha:string;
+  public usuarios:Usuario[];
+  
 
 
   constructor(private _http: HttpClient, public storage: Storage,) {
@@ -25,6 +29,9 @@ export class UsuariosServiceProvider {
 
   efetuaLogin(usuario,senha){
     return new Promise((resolve, reject)=>{
+      // Armazena credenciais para proximo login (UX), como fazer isso de forma mais segura ?
+      this.usuario=usuario;
+      this.senha=senha;
     let credenciais ={username:usuario, password:senha};
     // Utilização do Promisse, recebe dois parametros de resultado positivo/negativo
     // Termos resolve/reject são convenções da linguagem
@@ -60,4 +67,31 @@ export class UsuariosServiceProvider {
         });
       });
     });
-  }}
+  }
+  
+  checaUsername(username){
+    return new Promise((resolve)=>{
+    this._http.get<Usuario[]>('http://piupiuwer.polijunior.com.br/api/usuarios/')
+    .subscribe(
+      (usuarios) =>{
+        this.usuarios = usuarios;
+        console.log("HELLO", usuarios);
+        // Função que adiciona informações relevantes para o card, como tempo relativo e nome de usuario
+        this.usuarios.forEach(usuario => {
+          console.log("ESTOU TRABALHANDO COM CADA USUARIO",usuario);
+          // Compara com os usuários já disponiveis
+          if(usuario.username==username){
+            console.log("Encontrei outro usuario com mesmo nome");
+            resolve({
+              "usernameUtilizado":true
+            });
+          }else{
+            
+            resolve(null)
+          }})})})}
+
+
+
+
+
+}

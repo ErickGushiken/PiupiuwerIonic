@@ -5,6 +5,8 @@ import { UsuariosServiceProvider } from '../usuarios-service/usuarios-service';
 import * as moment from "moment";
 import { Usuario } from '../../modelos/usuario';
 import { Post } from '../../modelos/post';
+import { AlertController } from 'ionic-angular';
+import { HomePage } from '../../pages/home/home';
 
 @Injectable()
 
@@ -15,11 +17,14 @@ export class PostServiceProvider {
   public usuario:Usuario;
   public posts:Post[];
   public post:Post;
+  
+  
 
 
   constructor(private _http: HttpClient,
     public usuarioService:UsuariosServiceProvider,
     
+    private _alertCtrl:AlertController,
     ) {
      
       
@@ -94,23 +99,74 @@ export class PostServiceProvider {
 
   
   adicionaAutor(post){
+    return new Promise((resolve,reject)=>{
     this._http.get<Usuario[]>('http://piupiuwer.polijunior.com.br/api/usuarios/')
     .subscribe(
       (usuarios) =>{
         this.usuarios = usuarios;
+        
         // Função que adiciona informações relevantes para o card, como tempo relativo e nome de usuario
         this.usuarios.forEach(usuario => {
+          
           if(usuario.id==post.usuario){
-            console.log(usuario.username);
+            
             post.autor=usuario.username;
             console.log("Atribui o autor",post);
+            return
           }
         });
+        resolve(usuarios);
+      },(erro)=>{
+        reject(erro);
       }
     );
   }
 
-}
+)};
+
+  deletaPost(post){
+    
+    if (post.autor==this.usuarioService.usuario){
+      console.log("achei o dono do post",post.autor);
+      console.log("POST ID",post.id);
+      this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization':'JWT '+this.usuarioService.token,
+      });
+    }else{
+      console.log("Você não pode deletar");
+    
+      
+
+  }
+  console.log("sou o header oksaoks,aosmao",this.headers);
+      return new Promise((resolve,reject)=>{
+      this._http.delete('http://piupiuwer.polijunior.com.br/api/pius/'+post.id,{headers:this.headers})
+      .subscribe(
+        (resposta)=>{
+          // Zera o parametro
+          this.headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization':'JWT '+0,
+          });
+          console.log(resposta),
+          console.log("Colocar um toast de sucesso");
+          resolve(resposta);
+          
+        },
+        (erro)=>{this._alertCtrl.create({
+          title:"Ocorreu um problema",
+          subTitle:"Você não está autorizado a deletar esse post",
+          buttons:[{text:"ok"}]
+        }).present();
+        reject(erro);
+      }
+      
+      )})      
+
+
+  }
+
 
 
 // RECUPERAÇÂO DA VERSÂO FUNCIONAL
@@ -120,5 +176,4 @@ export class PostServiceProvider {
 // }, (erro)=>{
 //   reject(erro);
 // });
-
-
+}

@@ -16,10 +16,7 @@
 </ion-header>
 
 <ion-content padding scroll="false">
-  <!-- Implementação do sistema pull-to-refresh nativo -->
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+  
 
   <ion-card class="formCard">
     
@@ -50,9 +47,18 @@
   
 
   <ion-card-content>
-    <ion-item (click)="selecionaPost(post)" text-wrap>
-      <p>{{post.conteudo}}</p>
-    </ion-item>
+    <ion-row>
+      <ion-col col-10> 
+      <ion-item (click)="selecionaPost(post)" text-wrap>
+        <p>{{post.conteudo}}</p>
+      </ion-item>
+      </ion-col>
+      <ion-col col-1>
+        <button ion-button icon-center clear large (click)="deletaPost(post)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-card-content>
 
   <ion-row>

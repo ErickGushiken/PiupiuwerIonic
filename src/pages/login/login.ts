@@ -20,8 +20,8 @@ import { PostServiceProvider } from '../../providers/post-service/post-service';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  username:string="Erick_Gushiken";
-  password:string="vempoli@852";
+  username:string="";
+  password:string="";
   name:string="";
   carregando: any;
 
@@ -34,6 +34,8 @@ export class LoginPage {
   
     
     ) {
+    this.username=_usuariosService.usuario;
+    this.password=_usuariosService.senha;
 
     }
 

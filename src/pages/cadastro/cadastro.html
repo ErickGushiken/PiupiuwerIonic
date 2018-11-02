@@ -10,22 +10,38 @@
 
 <ion-content scroll="false">
 
-  <form class="cadastroForm" (ngSubmit)="efetuaCadastro()">
+  <p *ngIf="tentativaCadastro">Por favor, verifique os dados e tente novamente.</p>
+
+  <form class="cadastroForm" [formGroup]="formulario">
     <ion-label stacked>Nome:</ion-label>
-    <ion-input [(ngModel)]="nome" name="nome"></ion-input>
+    <ion-input formControlName="first_name" type="text"></ion-input>
   
     <ion-label stacked>Sobrenome:</ion-label>
-    <ion-input [(ngModel)]="sobrenome" name="sobrenome"></ion-input>
+    <ion-input formControlName="last_name" type="text"></ion-input>
 
-    <ion-label stacked>Nome do usuário:</ion-label>
-    <ion-input [(ngModel)]="username" name="nomeUsuario"></ion-input>
-
-    <ion-label stacked>Senha:</ion-label>
-    <ion-input [(ngModel)]="password" type="password" name="senha"></ion-input>
-  
     <ion-label stacked>Email:</ion-label>
-    <ion-input [(ngModel)]="email" name="email"></ion-input>
+    <ion-input formControlName="email" type="email"></ion-input>
 
-    <button ion-button block type="submit" class="cadastro">cadastrar</button>
+    <ion-label stacked>* Nome do usuário:</ion-label>
+    <ion-input formControlName="username" type="text"></ion-input>
+    <ion-item *ngIf="!formulario.controls.username.valido ||tentativaCadastro">
+      <p>O nome de usuário já existe.</p>
+    </ion-item>
+    <ion-item *ngIf="!formulario.controls.username.formatoValido ||tentativaCadastro">
+      <p>O nome de usuário pode conter apenas letras, dígitos e @/./+/-/_</p>
+    </ion-item>
+
+    <ion-label stacked>* Senha:</ion-label>
+    <ion-input formControlName="password" type="password"></ion-input>
+
+    <!-- <ion-label stacked>* Confirme sua senha:</ion-label>
+    <ion-input formControlName="password2" type="password"></ion-input>
+    <ion-item *ngIf="!formulario.controls.password2.valido ||tentativaCadastro">
+      <p>As senhas não são iguais.</p>
+    </ion-item> -->
+  
+    
+
+    <button ion-button block (click)="efetuaCadastro()" class="cadastro">cadastrar</button>
   </form>
 </ion-content>
