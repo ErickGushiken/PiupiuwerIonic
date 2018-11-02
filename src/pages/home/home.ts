@@ -55,7 +55,7 @@ export class HomePage {
     
 
     obtemPius(){
-
+      return new Promise((resolve,reject)=>{
       this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
       .subscribe(
         (posts) =>{
@@ -64,27 +64,32 @@ export class HomePage {
           posts.forEach(post =>{
             
             post.tempoRelativo=moment(post.data).fromNow();
+            console.log("tempo em milisegundos", new Date(post.data).getTime());
             
             // Para usar o .then a função adicionaAutor no serviço tinha que ser um Promise
             this._postService.adicionaAutor(post)
             .then(
               ()=>{
-                this.posts = posts.reverse();
-                
+                this.posts = posts;
+
+                this.posts.sort(function(a,b){
+                  return (new Date(a.data).getTime())-(new Date(b.data).getTime())
+                });
+                console.log("EM ORDEM", posts);
+                this.posts=this.posts.reverse();
               });
             
             
           });
           console.log("Pius completos");
           // this.posts = posts.reverse();
+          resolve(posts);
           
-          
-          
-
-          
+        },erro=>{
+          reject(erro);
         }
       );
-                     
+      })            
       }
     
     ionViewWillEnter() {
@@ -94,10 +99,11 @@ export class HomePage {
       });
       this.carregando.present();
   
-      this.obtemPius();
-      setTimeout(()=>{
+      this.obtemPius()
+      .then(()=>{setTimeout(()=>{
         this.carregando.dismiss();
-      },5000);
+      },5000);});
+      
         };
 
    
@@ -139,7 +145,13 @@ export class HomePage {
       this._postService.deletaPost(post).then(
         ()=>{
           // No caso de sucesso
-          this.obtemPius();
+          this.carregando = this.loadingCtrl.create({
+            content: 'Atualizando posts...'
+          });
+          this.carregando.present();
+          this.obtemPius().then(()=>{setTimeout(()=>{
+            this.carregando.dismiss();
+          },5000);});;
           console.log("ATUALIZANDO TUDO");
           // this._postService.obtemPius();
   
@@ -197,7 +209,13 @@ export class HomePage {
         this.conteudoPost="";
         contador.innerHTML="<p></p>";
         console.log("CRIADO");
-        this.obtemPius();
+        this.carregando = this.loadingCtrl.create({
+          content: 'Atualizando posts...'
+        });
+        this.carregando.present();
+        this.obtemPius().then(()=>{setTimeout(()=>{
+          this.carregando.dismiss();
+        },5000);});;
         // this._postService.obtemPius();
 
       },()=>{
