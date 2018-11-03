@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, Alert, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, Alert, LoadingController, Refresher } from 'ionic-angular';
 import * as moment from "moment";
 import { HttpClient} from '@angular/common/http';
 import { Post } from '../../modelos/post';
@@ -41,7 +41,7 @@ export class HomePage {
     ) 
     
     {
-
+      
       // this.carregandoAnimaçao();
       // // this._postService.obtemPius();
       // this.obtemPius();
@@ -93,9 +93,10 @@ export class HomePage {
       );
       })            
       }
-    
-    ionViewWillEnter() {
-      console.log("Estou no ionViewWillEnter");
+    // Primeira função a ser executada
+    ionViewWillEnter(){
+      
+      console.log("Estou refreshing");
       this.carregando = this.loadingCtrl.create({
         content: 'Preparando tudo...'
       });
@@ -105,13 +106,23 @@ export class HomePage {
       this.obtemPius()
       .then(()=>{setTimeout(()=>{
         this.carregando.dismiss();
-      },5000);});
-      
-        };
+        
 
-   
-  
+        // if(refresher!=0){
+        //   console.log("ESTOU REFRESHING");
+        // refresher.complete();}
+
+      },5000);});
+
+
+      
+        }
     
+       doRefresh(refresher){
+         this.obtemPius().then(()=>{
+           refresher.complete();
+         })
+       } 
   
 
 
