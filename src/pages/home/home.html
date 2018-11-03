@@ -26,8 +26,13 @@
         <ion-textarea rows=4 class="formPostInput" id="OLA" [(ngModel)]="conteudoPost" name="conteudoPost" type="string" placeholder="Escreva aqui..." (input)="contagemInput(conteudoPost)"></ion-textarea>
       <!-- </ion-item> -->
       <ion-row justify-content-center>
+        <ion-col>
         <p class="contador"></p>
+        </ion-col>
+        <ion-col>
         <button ion-button type="submit" class="formPostButton">Postar</button>
+        </ion-col>
+        <ion-col></ion-col>
       </ion-row>
     </form>
   </ion-card>
@@ -37,31 +42,39 @@
     <ion-card *ngFor="let post of posts" >
 
     <ion-row class="postHeader" align-items-baseline>
+  <ion-col col-10>     
   <ion-item (click)="selecionaUsuario(post)">
     <ion-avatar item-start>
-      <img src="./assets/imgs/your_picture.png">
+      
+      <img src="./assets/imgs/profilePicture.jpg" height="20px">
     </ion-avatar>
     <h2>{{post.autor}}</h2>
   </ion-item>
+</ion-col>
+  <ion-col col-1>
+    <button ion-button icon-center clear  (click)="deletaPost(post)">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-col>
   </ion-row>
   
 
   <ion-card-content>
     <ion-row>
-      <ion-col col-10> 
+      <ion-col > 
       <ion-item (click)="selecionaPost(post)" text-wrap>
         <p>{{post.conteudo}}</p>
       </ion-item>
       </ion-col>
-      <ion-col col-1>
+      <!-- <ion-col col-1>
         <button ion-button icon-center clear large (click)="deletaPost(post)">
           <ion-icon name="close"></ion-icon>
         </button>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
   </ion-card-content>
 
-  <ion-row>
+  <ion-row class="postOpçoes">
     <ion-col>
       <button ion-button icon-start clear small>
         <ion-icon name="star"></ion-icon>

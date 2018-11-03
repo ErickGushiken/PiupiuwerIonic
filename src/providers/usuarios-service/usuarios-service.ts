@@ -11,6 +11,7 @@ export class UsuariosServiceProvider {
   usuario:string;
   id:number;
   senha:string;
+  foto:string;
   public usuarios:Usuario[];
   
 
@@ -90,8 +91,31 @@ export class UsuariosServiceProvider {
             resolve(null)
           }})})})}
 
+  procuraUsuario(username){
+    return new Promise((resolve)=>{
+      this._http.get<Usuario[]>('http://piupiuwer.polijunior.com.br/api/usuarios/')
+      .subscribe(
+        (usuarios) =>{
+          this.usuarios = usuarios;
+          console.log("HELLO", usuarios);
+          // Função que adiciona informações relevantes para o card, como tempo relativo e nome de usuario
+          this.usuarios.forEach(usuario => {
+            console.log("ESTOU TRABALHANDO COM CADA USUARIO",usuario.username);
+            // Compara com os usuários já disponiveis
+            if(usuario.username==username){
+              console.log("Encontrei o usuario",usuario);
+              
+              resolve(usuario);
+              // Lança uma exceção para parar a função
+              throw "";
+              
+                
+            }else{
+              
+              console.log("não deu match");
+            
+            }})})})}
+  }
 
 
 
-
-}

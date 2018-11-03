@@ -6,4 +6,5 @@ export interface Post{
     usuario:number;
     tempoRelativo:any;
     autor:string;
+    image:any;
 }

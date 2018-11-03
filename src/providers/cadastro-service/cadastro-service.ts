@@ -23,6 +23,7 @@ export class CadastroServiceProvider {
     var first_name=formulario.value['first_name'];
     var last_name=formulario.value['last_name'];
     var email=formulario.value['email'];
+    
     return this._http.post<Usuario>('http://piupiuwer.polijunior.com.br/api/usuarios/registrar/',
       {username,
        password,

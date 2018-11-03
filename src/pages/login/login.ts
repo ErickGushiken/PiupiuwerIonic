@@ -24,6 +24,7 @@ export class LoginPage {
   password:string="";
   name:string="";
   carregando: any;
+  public foto = document.querySelector('.fotoUsuario');
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,

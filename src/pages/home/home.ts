@@ -178,7 +178,10 @@ export class HomePage {
         }else if(num_palavras>140){
           novoPostCard.classList.remove("bordaAzul");
           novoPostCard.classList.add("bordaVermelha");
-        }else{
+        }else if(num_palavras==0){
+          contador.innerHTML="<p></p>";
+        }
+        else{
           novoPostCard.classList.remove("bordaAzul");
           novoPostCard.classList.remove("bordaVermelha");
         }
