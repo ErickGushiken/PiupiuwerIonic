@@ -5,6 +5,9 @@
 myapp{
     #usuarioMenu{
         background-image: url("../assets/imgs/userBackground.jpg");
+    //    Trabalha a opacidade para permitir que o texto seja lido (UX)
+        background-color: hsla(30%,0%,20%,0.70);
+        background-blend-mode: overlay;
         height: 150px;
         margin-bottom: 10px;
 
@@ -14,13 +17,15 @@ myapp{
         }
 
         h2{
-            color: white;
+            color: rgb(255, 255, 255);
+            
         }
 
         p{
             text-align: start;
             color: white;
         }
+        
     }
 }
 

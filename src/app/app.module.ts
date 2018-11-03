@@ -27,6 +27,7 @@ import { IonicStorageModule} from '@ionic/storage';
 
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { PostServiceProvider } from '../providers/post-service/post-service';
+import { FriendPage } from '../pages/friend/friend';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { PostServiceProvider } from '../providers/post-service/post-service';
     CadastroPage,
     LoginPage,
     TimeAgoPipe,
+    FriendPage,
 
   ],
   imports: [
@@ -55,6 +57,7 @@ import { PostServiceProvider } from '../providers/post-service/post-service';
     UserPage,
     CadastroPage,
     LoginPage, 
+    FriendPage,
   ],
   providers: [
     StatusBar,

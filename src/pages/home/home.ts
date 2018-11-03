@@ -8,6 +8,7 @@ import { CadastroPage } from '../cadastro/cadastro';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { PostServiceProvider } from '../../providers/post-service/post-service';
 import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
+import { FriendPage } from '../friend/friend';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuari
 export class HomePage {
   conteudoPost:string="";
   carregando: any;
+  email:string="dnsaijkdnasidas";
   
 
   
@@ -98,6 +100,7 @@ export class HomePage {
         content: 'Preparando tudo...'
       });
       this.carregando.present();
+      
   
       this.obtemPius()
       .then(()=>{setTimeout(()=>{
@@ -122,10 +125,11 @@ export class HomePage {
     }
 
     selecionaUsuario(post: Post){
-      console.log(post.usuario);
-      console.log("fechou");
-      this.navCtrl.push(UserPage);
-      // this._autorService
+
+      console.log(post.autor);
+      console.log("selecionei post");
+      this.navCtrl.push(FriendPage,{usuarioUsername:post.autor});
+      
     }
 
     irParaTeste(){

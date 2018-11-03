@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
 import { Usuario } from '../../modelos/usuario';
@@ -32,13 +32,19 @@ export class LoginPage {
     private _usuariosService:UsuariosServiceProvider,
     public loadingCtrl:LoadingController,
     private _postService:PostServiceProvider,
+    private menuCtrl:MenuController,
   
     
     ) {
     this.username=_usuariosService.usuario;
     this.password=_usuariosService.senha;
-
+  this.menuCtrl.enable(false,"meuMenu");
     }
+
+    ionViewWillLeave(){
+      this.menuCtrl.enable(true,"meuMenu");
+    }
+
 
   efetuaLogin(){
     this.carregandoAnimaçao();

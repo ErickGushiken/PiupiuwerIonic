@@ -2,19 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Img, LoadingController } from 'ionic-angular';
 import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
 import * as JWT from 'jwt-decode';
-import { urlToNavGroupStrings } from 'ionic-angular/umd/navigation/url-serializer';
-import { ReadVarExpr, UrlResolver } from '@angular/compiler';
+
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../../modelos/post';
 import * as moment from "moment";
 import { PostServiceProvider } from '../../providers/post-service/post-service';
 
-/**
- * Generated class for the UserPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -48,10 +42,7 @@ export class UserPage {
      
      
     {
-      var nome="";
-      var sobrenome="";
-      var email=""; 
-      var id="";
+    
       this.token=_usuarioService.token;
       this.username=JWT(this.token)['username'];
       _usuarioService.procuraUsuario(this.username)
@@ -60,7 +51,7 @@ export class UserPage {
         this.sobrenome=result["last_name"];
         this.email=result["email"];
         this.id=result["id"];
-      console.log("encontrei o username",id,result["id"]);
+      console.log("encontrei o username",this.id,result["id"]);
   }
 )
     }
@@ -80,7 +71,7 @@ export class UserPage {
 
 
     obtemPiusUsuario(username){
-      
+      var mensagemNPius = document.querySelector('.mensagemNPius');
       return new Promise((resolve,reject)=>{
       this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
       .subscribe(
@@ -94,7 +85,10 @@ export class UserPage {
               console.log("Coloquei o post do", username,post);
             }
           });
-          
+          if (this.postsUsuario.length==0){
+            console.log("sou otario e não postei pius");
+          mensagemNPius.innerHTML="<p>"+username+" ainda não possui pius.</p>";
+        }
           this.postsUsuario.forEach(post =>{
           
             // Para usar o .then a função adicionaAutor no serviço tinha que ser um Promise
@@ -111,7 +105,10 @@ export class UserPage {
                   return (new Date(a.data).getTime())-(new Date(b.data).getTime())
                 });
                 console.log("EM ORDEM", posts);
+                
                 this.numeroPius=this.posts.length;
+                console.log("fsd+6f5sd+6fds+6fs",this.posts.length);
+                
                 this.posts=this.posts.reverse();
               })});
           });
@@ -122,7 +119,30 @@ export class UserPage {
         }
       );
       })            
-      }}
+      }
+      deletaPost(post:Post){
+        console.log("Vou deletar / home.ts");
+        this._postService.deletaPost(post).then(
+          ()=>{
+            // No caso de sucesso
+            this.carregando = this.loadingCtrl.create({
+              content: 'Atualizando posts...'
+            });
+            this.carregando.present();
+            this.obtemPiusUsuario(this.username).then(()=>{setTimeout(()=>{
+              this.carregando.dismiss();
+            },5000);});;
+            console.log("ATUALIZANDO TUDO");
+            // this._postService.obtemPius();
+    
+          },()=>{
+            // No caso de erro
+            console.log("deu ruim");
+            
+          }
+        );
+    
+    }
 
-
+  }
     

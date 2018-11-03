@@ -1,16 +1,20 @@
 <!-- Note o comando content no ion-menu que é linkado com o #conteudo do ion-nav -->
-<ion-menu [content]="conteudo">
+<ion-menu id="meuMenu" [content]="conteudo">
     <ion-content>
         <!-- Dados do usuário -->
         <ion-item id="usuarioMenu">
             <div>
                 <ion-avatar item-start>
-                    <img src="./assets/imgs/erickGushiken.jpeg">
+                    <img src="./assets/imgs/profilePicture.jpg">
                 </ion-avatar>
             </div>
-            <ion-col>
-            <h2>Erick Gushiken</h2>
-            <p>erickgushiken@hotmail.com</p>
+            <ion-col class="informacoes">
+                <ion-row>
+            <h2>{{usuario}}</h2>
+        </ion-row>
+        <ion-row>
+            <p>{{email}}</p>
+        </ion-row>
             </ion-col>
         </ion-item>
 

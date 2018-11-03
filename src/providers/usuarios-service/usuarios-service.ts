@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import{ Storage } from '@ionic/storage';
 import * as JWT from 'jwt-decode';
 import { Usuario } from '../../modelos/usuario';
+import {Events} from 'ionic-angular';
 
 
 @Injectable()
@@ -10,23 +11,20 @@ export class UsuariosServiceProvider {
   token:any;
   usuario:string;
   id:number;
+  
   senha:string;
   foto:string;
   public usuarios:Usuario[];
+  email: any;
   
 
 
-  constructor(private _http: HttpClient, public storage: Storage,) {
+  constructor(private _http: HttpClient, 
+    public storage: Storage,
+    public events:Events,
+    ) {
   }
-  // Correto modo antigo
-  // efetuaLogin(username,password){
-  //   console.log({username,password});
-  //   return this._http.post<Usuario>('http://piupiuwer.polijunior.com.br/api/login/',{username,password})
-  //   .do((usuario:Usuario)=> this._usuarioLogado = usuario);
-  // }
-  // obtemUsuarioLogado(){
-  //   return this._usuarioLogado;
-  // }
+
 
   efetuaLogin(usuario,senha){
     return new Promise((resolve, reject)=>{
@@ -43,14 +41,17 @@ export class UsuariosServiceProvider {
         console.log("CRYSTAL",JWT(resposta['token'])['user_id']);
         this.token = resposta['token'];
         this.id=JWT(resposta['token'])['user_id'];
+        this.email=JWT(resposta['token'])['email'];
         
         this.storage.set('token',resposta['token']);
         console.log("OLHAAAA O TOKEN",this.token);
         resolve(resposta);
+        this.events.publish("usuario criado",usuario,this.email);
       },(erro)=>{
         reject(erro);
       });
     });
+    
   }
   checaUsuario(){
     console.log("entrei na checausuario service");
