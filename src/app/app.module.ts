@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, NavController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { HttpClientModule } from '@angular/common/http';
-import { UserPage } from '../pages/user/user';
+// import { UserPage } from '../pages/user/user';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { LoginPage } from '../pages/login/login';
 import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-service';
@@ -34,7 +34,7 @@ import { FriendPage } from '../pages/friend/friend';
   declarations: [
     MyApp,
     HomePage,
-    UserPage,
+    // UserPage,
     CadastroPage,
     LoginPage,
     TimeAgoPipe,
@@ -54,7 +54,7 @@ import { FriendPage } from '../pages/friend/friend';
   entryComponents: [
     MyApp,
     HomePage,
-    UserPage,
+    // UserPage,
     CadastroPage,
     LoginPage, 
     FriendPage,
@@ -67,6 +67,7 @@ import { FriendPage } from '../pages/friend/friend';
     CadastroServiceProvider,
     PostServiceProvider,
     SocialSharing,
+    
     
 
     

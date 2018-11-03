@@ -5,20 +5,27 @@
       <ion-title>{{username}}</ion-title>
     </ion-navbar>
   
-    <ion-row justify-content-center>
-        <ion-avatar >
-          <img src="./assets/imgs/profilePicture.jpg" height="20px">
-          </ion-avatar>
-      </ion-row>
+
   
   
   </ion-header>
+  <ion-content id="conteudo">
+      <div class="headerBackground">
+      <ion-row justify-content-center>
+      
+          <ion-avatar class="profilePicture" >
+            <img src="./assets/imgs/profilePicture.jpg" height="20px">
+            </ion-avatar>
+        </ion-row>
+
+      
+  </div>
+
+
+  <div padding >
+      <ion-card >
   
-  
-  <ion-content padding >
-      <ion-card  >
-  
-        <ion-row class="postHeader" align-items-baseline>
+        <ion-row class="Informaçoes" align-items-baseline>
         <ion-col>     
         <h1>Informações pessoais</h1>
           <h2>Nome: {{nome}} {{sobrenome}}</h2>
@@ -95,6 +102,6 @@
       </ion-card>
       </ion-list>
       
-      
+      </div>
   </ion-content>
   

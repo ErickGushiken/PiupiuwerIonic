@@ -74,8 +74,33 @@ ionViewDidEnter() {
   
     };
 
+// Função para deletar Post
+deletaPost(post:Post){
+  console.log("Vou deletar / home.ts");
+  this._postService.deletaPost(post).then(
+    ()=>{
+      // No caso de sucesso
+      this.carregando = this.loadingCtrl.create({
+        content: 'Atualizando posts...'
+      });
+      this.carregando.present();
+      this.obtemPiusUsuario(this.username).then(()=>{setTimeout(()=>{
+        this.carregando.dismiss();
+      },5000);});;
+      console.log("ATUALIZANDO TUDO");
 
+    },()=>{
+      // No caso de erro
+      console.log("deu ruim");
+      
+    }
+  );
+  
+  
+}
 obtemPiusUsuario(username){
+  this.posts=[];
+  this.postsUsuario=[];
   var mensagemNPius = document.querySelector('.mensagemNPius');
   return new Promise((resolve,reject)=>{
   this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')

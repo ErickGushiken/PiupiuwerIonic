@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, Events } from 'ionic-angular';
+import { Platform, Events, NavController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 
-import { UserPage } from '../pages/user/user';
+// import { UserPage } from '../pages/user/user';
 import { LoginPage } from '../pages/login/login';
 import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-service';
+import { FriendPage } from '../pages/friend/friend';
 
 @Component({
   // O selector encapsula as alterações do scss
@@ -14,18 +15,21 @@ import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-
   templateUrl: 'app.html'
 })
 export class MyApp {
+  
   // Recuperar o elemento de navegação do template
-  @ViewChild(Nav) public nav:Nav;
+  @ViewChild(Nav)
+  public nav:Nav;
+  _navCtrl:NavController;
   rootPage:any = LoginPage;
 
   // Define as paginas que podem ser acessadas do menu
   public paginas = [
-    {titulo : "Meu Perfil", componente: UserPage, icone:'person',},
+    {titulo : "Meu Perfil", componente: FriendPage, icone:'person',},
     {titulo : "Sair", componente: LoginPage, icone:'log-out',}
 
   ];
-  usuario: string;
-  email: any;
+  usuario: string="";
+  email: string="";
   
   
 
@@ -34,7 +38,11 @@ export class MyApp {
      statusBar: StatusBar,
       splashScreen: SplashScreen,
       private _usuarioService:UsuariosServiceProvider,
-      public events:Events) {
+      public events:Events,
+      // private _navCtrl:NavController,
+      
+      
+      ) {
         events.subscribe("usuario criado",(usuarioUsername, usuarioEmail)=>{
           this.usuario=usuarioUsername;
           this.email=usuarioEmail;
@@ -59,12 +67,19 @@ export class MyApp {
   }
 
   irParaPagina(componente){
+    var amigo=this.usuario
+    console.log("sou o usuario sjiandasjkndska",this.usuario);
     
     if(componente=="LoginPage"){
       this.nav.setRoot(componente);
     }else{
-    this.nav.push(componente);
-    }
+      // if (componente=="FriendPage"){
+      console.log("Sou o parametro para outra pagina",amigo);
+      this.nav.push(componente,{usuarioUsername:amigo});
+  //   }else{
+  //     this.nav.push(componente);
+  // }
+}
   }
 }
 

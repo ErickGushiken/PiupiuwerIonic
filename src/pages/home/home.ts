@@ -3,7 +3,7 @@ import { NavController, AlertController, Alert, LoadingController } from 'ionic-
 import * as moment from "moment";
 import { HttpClient} from '@angular/common/http';
 import { Post } from '../../modelos/post';
-import { UserPage } from '../user/user';
+// import { UserPage } from '../user/user';
 import { CadastroPage } from '../cadastro/cadastro';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { PostServiceProvider } from '../../providers/post-service/post-service';
@@ -120,7 +120,7 @@ export class HomePage {
     selecionaPost(post: Post){
       console.log("OLA");
       console.log(post.conteudo);
-      this.navCtrl.push(UserPage);
+      this.navCtrl.push(FriendPage,{usuarioUsername:post.autor});
 
     }
 

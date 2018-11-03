@@ -2,8 +2,64 @@
 .md ion-title{
     margin-left: -2em !important;
 }
+page-friend{
+ion-title{
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-style: normal !important;
+}
 ion-card-content{
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 1.2em !important;
     margin: 0.5em !important;
+}
+ion-card{
+    width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: 1rem !important;
+    border-radius: 5px !important;
+    padding: 0.5rem !important;
+    
+}
+.headerBackground {
+    position: relative;
+    margin-top: 2vh;
+    background: url('../assets/imgs/userBackground.jpg') no-repeat transparent;
+    background-size: cover;
+    height: 30% !important;
+    width: 90%;
+    margin-left: 5%;
+    z-index: 1;
+    background-repeat: repeat;
+    border-radius: 5px !important;
+    
+
+}
+.mensagemNPius{
+    text-align: center;
+}
+h1{
+    text-align: center;
+}
+.profilePicture{
+    margin-top: 3vh;
+}
+ion-avatar img {
+    border-radius: 75px;
+    width:150px;
+    height: 150px;
+}
+#conteudo{
+    display: flex !important;
+    align-content: center!important;
+    
+}
+ion-list{
+    .postHeader{
+        align-items: center !important;
+    }
+}
+
+.Informaçoes{
+    text-indent: 3%;
+}
 }
