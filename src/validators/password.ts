@@ -14,10 +14,10 @@ export class ValidationServiceProvider {
        const confirmPassword = AC.get('password2').value // to get value in input tag
         if(newPassword != confirmPassword) {
             console.log('false');
-            AC.get('password2').setErrors( { MatchPassword: true } )
+            AC.get('password2').setErrors( { MatchPassword: false } )
         } else {
-            console.log('true')
-            AC.get('password2').setErrors({ MatchPassword: false });
+            console.log('true');
+            // AC.get('password2').setErrors({ MatchPassword:true });
         }
     }
 }

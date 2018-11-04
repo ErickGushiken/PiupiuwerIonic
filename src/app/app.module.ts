@@ -29,7 +29,7 @@ import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-
 import { PostServiceProvider } from '../providers/post-service/post-service';
 import { FriendPage } from '../pages/friend/friend';
 import { DocumentacaoPage } from '../pages/documentacao/documentacao';
-import { UsernameValidador } from '../validators/username';
+
 
 
 
@@ -72,7 +72,7 @@ import { UsernameValidador } from '../validators/username';
     CadastroServiceProvider,
     PostServiceProvider,
     SocialSharing,
-    UsernameValidador,
+    
     
     
 

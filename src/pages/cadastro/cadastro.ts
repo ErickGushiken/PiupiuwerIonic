@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { CadastroServiceProvider } from '../../providers/cadastro-service/cadastro-service';
 import { FormBuilder,FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 
-import { AgeValidator } from  '../../validators/age';
-import { UsernameValidador } from  '../../validators/username';
 import { HomePage } from '../home/home';
 import { Usuario } from '../../modelos/usuario';
 import { ValidationServiceProvider } from '../../validators/password';
@@ -27,15 +25,15 @@ envio: boolean = false;
 
 constructor(public navCtrl: NavController,
   private toast:ToastController,
-  public usernameValidador:UsernameValidador,
+  
   public formBuilder: FormBuilder,
   private _cadastroService:CadastroServiceProvider,
   private _alertCtrl:AlertController
   ) {
   this.pagina1 = formBuilder.group({
-    first_name: [''],
-    last_name: [''],
-    email:[""],
+    first_name: ['', Validators.required],
+    last_name: ['', Validators.required],
+    email:["", Validators.required],
 });
 
 this.pagina2 = formBuilder.group({
@@ -62,18 +60,17 @@ prev(){
 
 save(){
 
-  // this.envio = true;
+  this.envio = true;
  
   if(!this.pagina2.valid){
-      this.envio=false;
+      
+      console.log("ERRO");
       this.signupSlider.slideTo(0);
-      this._alertCtrl.create({
-        title:"Ocorreu um problema",
-        subTitle:"Confirme sua senha",
-        buttons:[{text:"ok"}]
-      }).present();
   }
   else {
+    console.log("CHECK");
+    this.efetuaCadastro();
+   
   }
 }
 
@@ -85,7 +82,7 @@ save(){
 
 
   efetuaCadastro(){
-    this.save();
+    // this.save();
     console.log("SOU OS DADOS", this.pagina2)
 
     this._cadastroService

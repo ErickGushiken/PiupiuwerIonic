@@ -177,6 +177,9 @@ export class HomePage {
       contador.innerHTML="<p></p>";
       limite.innerHTML="<p></p>";
       contador.classList.remove("limite");
+      novoPostCard.classList.remove("bordaAzul");
+      novoPostCard.classList.remove("bordaVermelha");
+      contador.classList.remove("limite");
     }
     else{
       novoPostCard.classList.remove("bordaAzul");
@@ -187,6 +190,7 @@ export class HomePage {
 
   // Função para criar um post
   criaPost(){
+    var novoPostCard = document.querySelector('.formCard');
     var contador = document.querySelector('.contador');
     let post={
       conteudo:this.conteudoPost,
@@ -205,6 +209,8 @@ export class HomePage {
         // Limpar os campos do input
         this.conteudoPost="";
         contador.innerHTML="<p></p>";
+        novoPostCard.classList.remove("bordaAzul");
+        novoPostCard.classList.remove("bordaVermelha");
         this.carregando = this.loadingCtrl.create({
           content: 'Atualizando posts...'
         });
