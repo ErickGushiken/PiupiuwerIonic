@@ -9,6 +9,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { PostServiceProvider } from '../../providers/post-service/post-service';
 import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
 import { FriendPage } from '../friend/friend';
+import { DocumentacaoPage } from '../documentacao/documentacao';
 
 
 @Component({
@@ -143,8 +144,8 @@ export class HomePage {
       
     }
 
-    irParaTeste(){
-      this.navCtrl.push(CadastroPage);
+    irParaDocumentacao(){
+      this.navCtrl.push(DocumentacaoPage);
     }
 
     // Função para compartilhar no whats
@@ -153,6 +154,36 @@ export class HomePage {
       this.socialSharing.shareViaWhatsApp(msg,null,null);
       console.log("compartilhei");
     }
+    // FAVORITAR POST
+    favoritar(post:Post){
+      
+      this._postService.favoritaPost(post).then(
+        
+        ()=>{
+      
+        console.log("Favoritado");
+        this.carregando = this.loadingCtrl.create({
+          content: 'Atualizando posts...'
+        });
+        this.carregando.present();
+        this.obtemPius().then(()=>{setTimeout(()=>{
+          this.carregando.dismiss();
+        },5000);});;
+        // this._postService.obtemPius();
+
+      },()=>{
+        // No caso de erro
+        console.log("deu ruim");
+        this._alertCtrl.create({
+          title:"Ocorreu um problema",
+          subTitle:"Tente novamente",
+          buttons:[{text:"ok"}]
+        }).present();
+      });
+    }
+    
+
+
 
     // Função para deletar Post
     deletaPost(post:Post){

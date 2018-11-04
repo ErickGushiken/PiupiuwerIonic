@@ -8,8 +8,8 @@
     <ion-searchbar [(ngModel)]="searchInput" [showCancelButton]="shouldShowCancel" (ionCancel)="onCancel($event)"></ion-searchbar>
   
     <ion-buttons end>
-      <button ion-button icon-only (click)="irParaTeste()">
-        <ion-icon name="options"></ion-icon>
+      <button ion-button icon-only (click)="irParaDocumentacao()">
+        <ion-icon name="information-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -82,7 +82,7 @@
 
   <ion-row class="postOpçoes">
     <ion-col>
-      <button ion-button icon-start clear small>
+      <button ion-button icon-start clear small (click)="favoritar(post)">
         <ion-icon name="star"></ion-icon>
         <div> Favoritar</div>
       </button>

@@ -81,7 +81,7 @@ export class PostServiceProvider {
       'Content-Type': 'application/json',
       'Authorization':'JWT '+this.usuarioService.token,
     });
-
+    
 
     console.log("entrei na criaPost");
     return new Promise((resolve,reject)=>{
@@ -176,4 +176,48 @@ export class PostServiceProvider {
 // }, (erro)=>{
 //   reject(erro);
 // });
+  favoritaPost(post){
+    if (post.autor==this.usuarioService.usuario){
+      console.log("achei o dono do post",post.autor);
+      console.log("POST ID",post.id);
+      this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization':'JWT '+this.usuarioService.token,
+      });
+    }else{
+      console.log("Você não pode deletar");
+    
+      
+
+  }
+  let favoritar={
+    favoritado:true
+  };
+  console.log("sou o header oksaoks,aosmao",this.headers);
+      return new Promise((resolve,reject)=>{
+      this._http.patch('http://piupiuwer.polijunior.com.br/api/pius/'+post.id,favoritar,{headers:this.headers})
+      .subscribe(
+        (resposta)=>{
+          // Zera o parametro
+          this.headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization':'JWT '+0,
+          });
+          console.log(resposta),
+          console.log("Colocar um toast de sucesso de favoritar");
+          resolve(resposta);
+          
+        },
+        (erro)=>{this._alertCtrl.create({
+          title:"Ocorreu um problema",
+          subTitle:"Você não está autorizado a favoritar esse post",
+          buttons:[{text:"ok"}]
+        }).present();
+        reject(erro);
+      }
+      
+      )})      
+
+  }
 }
+

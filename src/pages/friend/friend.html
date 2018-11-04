@@ -47,7 +47,7 @@
   
       <!-- Listagem dos pius do usuário -->
       <ion-list >
-          <ion-card *ngFor="let post of posts" >
+          <ion-card *ngFor="let post of postsOrganizados" >
       
           <ion-row class="postHeader" align-items-baseline>
         <ion-col col-10>     
@@ -80,7 +80,7 @@
       
         <ion-row class="postOpçoes">
           <ion-col>
-            <button ion-button icon-start clear small>
+            <button ion-button icon-start clear small (click)="favoritar(post)">
               <ion-icon name="star"></ion-icon>
               <div> Favoritar</div>
             </button>

@@ -28,6 +28,7 @@ import { IonicStorageModule} from '@ionic/storage';
 import { CadastroServiceProvider } from '../providers/cadastro-service/cadastro-service';
 import { PostServiceProvider } from '../providers/post-service/post-service';
 import { FriendPage } from '../pages/friend/friend';
+import { DocumentacaoPage } from '../pages/documentacao/documentacao';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { FriendPage } from '../pages/friend/friend';
     LoginPage,
     TimeAgoPipe,
     FriendPage,
+    DocumentacaoPage,
 
   ],
   imports: [
@@ -58,6 +60,7 @@ import { FriendPage } from '../pages/friend/friend';
     CadastroPage,
     LoginPage, 
     FriendPage,
+    DocumentacaoPage,
   ],
   providers: [
     StatusBar,

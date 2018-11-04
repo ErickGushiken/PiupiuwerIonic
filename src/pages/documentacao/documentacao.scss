@@ -1,0 +1,44 @@
+page-documentacao{
+    ion-avatar img {
+        border-radius: 40px;
+        height: 80px;
+    }
+    ion-row{
+        text-align: center !important;
+    }
+    .headerBackground {
+        position: absolute;
+        background: url('../assets/imgs/abstract.jpg') no-repeat transparent;
+        background-size: cover;
+        height: 30%;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        background-repeat: repeat;
+        animation: animatedBackground 7s linear infinite;
+    }
+    .profilePicture{
+        margin-top: 1.4em!important;
+    }
+    #conteudo{
+        display: flex !important;
+        align-content: center!important;
+    }
+    ion-list{
+        right: 2.5%;
+        width: 95%;
+        position: absolute;
+        top: 32%;
+        ion-card{
+            padding: 1.2em !important;
+        }
+        p{
+            text-align: start;
+        }
+    }
+    h1,p{
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(145, 145, 145);
+    }
+}

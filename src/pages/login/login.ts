@@ -5,6 +5,7 @@ import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuari
 import { Usuario } from '../../modelos/usuario';
 import { CadastroPage } from '../cadastro/cadastro';
 import { PostServiceProvider } from '../../providers/post-service/post-service';
+import { DocumentacaoPage } from '../documentacao/documentacao';
 
 
 /**
@@ -87,9 +88,9 @@ export class LoginPage {
     // )  
   }
 
-  irParaPagina(){
-    this.navCtrl.push(CadastroPage);
-  }
+    irParaDocumentacao(){
+      this.navCtrl.push(DocumentacaoPage);
+    }
 
   carregandoAnimaçao(){
     this.carregando=this.loadingCtrl.create({
