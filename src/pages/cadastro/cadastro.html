@@ -1,47 +1,64 @@
 
 <ion-header>
-
   <ion-navbar>
-    <ion-title>cadastro</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content scroll="false">
 
-  <p *ngIf="tentativaCadastro">Por favor, verifique os dados e tente novamente.</p>
+<ion-content scroll="false" no-padding class="cadastro">
+  <div class="headerBackground" padding>
+    </div>
+    <div class="headerInfo">
+      <ion-row id="logoRow" justify-content-center>
+        <img id="piupiuwerLogo" src="./assets/imgs/piupiuwer_logo_color.png">
+        <h1>Piupiuwer</h1>
+      </ion-row>
+    </div>
 
-  <form class="cadastroForm" [formGroup]="formulario">
-    <ion-label stacked>Nome:</ion-label>
-    <ion-input formControlName="first_name" type="text"></ion-input>
-  
-    <ion-label stacked>Sobrenome:</ion-label>
-    <ion-input formControlName="last_name" type="text"></ion-input>
 
-    <ion-label stacked>Email:</ion-label>
-    <ion-input formControlName="email" type="email"></ion-input>
+  <ion-slides #signupSlider pager="true" paginatioType="bullet" padding>
+    <ion-slide>
+      <p *ngIf="envio" style="color: red;">Verifique seus dados</p>
+      <ion-list no-lines>
+         <form [formGroup]="pagina1">
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input formControlName="first_name" type="text" ></ion-input>
+            </ion-item>
+ 
+            <ion-item>
+                <ion-label stacked>Sobrenome</ion-label>
+                <ion-input formControlName="last_name" type="text"></ion-input>
+            </ion-item>
 
-    <ion-label stacked>* Nome do usuário:</ion-label>
-    <ion-input formControlName="username" type="text"></ion-input>
-    <ion-item *ngIf="!formulario.controls.username.valido ||tentativaCadastro">
-      <p>O nome de usuário já existe.</p>
-    </ion-item>
-    <ion-item *ngIf="!formulario.controls.username.formatoValido ||tentativaCadastro">
-      <p>O nome de usuário pode conter apenas letras, dígitos e @/./+/-/_</p>
-    </ion-item>
-
-    <ion-label stacked>* Senha:</ion-label>
-    <ion-input formControlName="password" type="password"></ion-input>
-
-    <!-- <ion-label stacked>* Confirme sua senha:</ion-label>
-    <ion-input formControlName="password2" type="password"></ion-input>
-    <ion-item *ngIf="!formulario.controls.password2.valido ||tentativaCadastro">
-      <p>As senhas não são iguais.</p>
-    </ion-item> -->
-  
-    
-
-    <button ion-button block (click)="efetuaCadastro()" class="cadastro">cadastrar</button>
-  </form>
+            <ion-item>
+              <ion-label stacked>Email</ion-label>
+              <ion-input formControlName="email" type="email"></ion-input>
+            </ion-item>
+          </form>
+        </ion-list>
+      </ion-slide>
+      
+      <ion-slide>
+      <ion-list no-lines>
+        <form [formGroup]="pagina2">
+          <ion-item>
+              <ion-label stacked>Username</ion-label>
+              <ion-input formControlName="username" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Crie uma senha</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Confirme a senha</ion-label>
+            <ion-input [class.invalid]="!pagina2.controls.password2.valid && (pagina2.controls.password2.dirty || envio)" formControlName="password2" type="password"></ion-input>
+          </ion-item>
+        </form>
+      </ion-list>
+      <button ion-button (click)="efetuaCadastro()">Cadastrar</button>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

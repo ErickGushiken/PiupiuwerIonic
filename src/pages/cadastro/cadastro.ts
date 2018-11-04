@@ -1,17 +1,13 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { CadastroServiceProvider } from '../../providers/cadastro-service/cadastro-service';
-import { Usuario } from '../../modelos/usuario';
-import { HomePage } from '../home/home';
-import { FormBuilder,FormGroup, Validators, FormControl } from '@angular/forms';
-import { UsernameValidador } from '../../validators/username';
+import { FormBuilder,FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 
-/**
- * Generated class for the CadastroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AgeValidator } from  '../../validators/age';
+import { UsernameValidador } from  '../../validators/username';
+import { HomePage } from '../home/home';
+import { Usuario } from '../../modelos/usuario';
+import { ValidationServiceProvider } from '../../validators/password';
 
 @IonicPage()
 @Component({
@@ -19,70 +15,98 @@ import { UsernameValidador } from '../../validators/username';
   templateUrl: 'cadastro.html',
 })
 export class CadastroPage {
-
-
-  public nome: string = '';
-  public sobrenome: string = '';
-  public username: string ="";
-  public email: string = '';
-  public password:string ="";
-  public password2:string ="";
-  formulario: any;
-  tentativaCadastro: boolean=false;
-
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public formBuilder:FormBuilder,
-    private _alertCtrl:AlertController,
-    private _cadastroService:CadastroServiceProvider) {
-
-    this.formulario =   this.formBuilder.group({
-      
-      
-      
-      // password2:['',Validators.compose([Validators.required])],
-      
-      
-      email: new FormControl(''),
-      last_name: new FormControl(''),
-      first_name: new FormControl(''),
-      password:['',Validators.compose([Validators.required])],
-      username: new FormControl('',Validators.compose([Validators.maxLength(140),Validators.pattern('[a-zA-Z0-9@,+-_ ]*'),Validators.required])),
-    })    
-
-      
-  }
+// NOVA IMPLEMENTAÇÂO
+@ViewChild('signupSlider') 
+signupSlider: any;
+pagina1: FormGroup;
+pagina2: FormGroup;
+public mensagem:any;
+envio: boolean = false;
 
   
-  efetuaCadastro(){
-    
 
-    console.log('OLAE',this.nome);
-    console.log("hello",this.formulario);
-    console.log(this.sobrenome);
-    console.log(this.username);
-    console.log(this.email);
-    console.log(this.password);
-// .efetuaCadastro(this.username, this.password,this.nome,this.sobrenome,this.email)
+constructor(public navCtrl: NavController,
+  private toast:ToastController,
+  public usernameValidador:UsernameValidador,
+  public formBuilder: FormBuilder,
+  private _cadastroService:CadastroServiceProvider,
+  private _alertCtrl:AlertController
+  ) {
+  this.pagina1 = formBuilder.group({
+    first_name: [''],
+    last_name: [''],
+    email:[""],
+});
+
+this.pagina2 = formBuilder.group({
+    username: ['', Validators.compose(
+          [Validators.maxLength(140),
+          Validators.pattern('[a-zA-Z0-9@,+-_ ]*'),
+          Validators.required]
+        )],
+    password: ['', Validators.required],
+    password2:["",Validators.required], 
+},
+{validator: ValidationServiceProvider.MatchPassword}
+);
+
+}
+
+next(){
+    this.signupSlider.slideNext();
+}
+
+prev(){
+    this.signupSlider.slidePrev();
+}
+
+save(){
+
+  // this.envio = true;
+ 
+  if(!this.pagina2.valid){
+      this.envio=false;
+      this.signupSlider.slideTo(0);
+      this._alertCtrl.create({
+        title:"Ocorreu um problema",
+        subTitle:"Confirme sua senha",
+        buttons:[{text:"ok"}]
+      }).present();
+  }
+  else {
+  }
+}
+
+
+
+
+
+
+
+
+  efetuaCadastro(){
+    this.save();
+    console.log("SOU OS DADOS", this.pagina2)
+
     this._cadastroService
-    .efetuaCadastro(this.formulario)
+    .efetuaCadastro(this.pagina1,this.pagina2)
     .subscribe(
       (usuario:Usuario)=>{
-        console.log(usuario);
-        // console.log("OLAMUNDO",this.usuarioNovo);
         this.navCtrl.setRoot(HomePage);
-      },
-      ()=>{
+        this.mensagem=this.toast.create({
+          message: 'Login bem sucedido',
+          duration: 3000,
+        });
+        this.mensagem.present();
+      },()=>{
         this._alertCtrl.create({
-          title: "Falha no cadatro",
-          subTitle:"Username já existente",
+          title: "Falha no cadastro",
+          subTitle:"Ocorreu um problema",
           buttons:[
             {text:"ok"}
           ]
         }).present();
       }
     )
-
   }
-
 }

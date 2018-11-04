@@ -8,22 +8,18 @@ export class CadastroServiceProvider {
   private _usuarioLogado:Usuario;
 
   constructor(private _http: HttpClient) {
-
-    
   }
-  
-  efetuaCadastro(formulario){
-    console.log(formulario.value['username'],
-    formulario.value['password'],
-    formulario.value['last_name'],
-    formulario.value['first_name'],
-    formulario.value['email']);
-    var username = formulario.value['username'];
-    var password=formulario.value['password'];
-    var first_name=formulario.value['first_name'];
-    var last_name=formulario.value['last_name'];
-    var email=formulario.value['email'];
-    
+  efetuaCadastro(formulario1,formulario2){
+    // Extrai os dados dos formularios
+    formulario2.value['password'],
+    formulario1.value['last_name'],
+    formulario1.value['first_name'],
+    formulario1.value['email'];
+    var username = formulario2.value['username'];
+    var password=formulario2.value['password'];
+    var first_name=formulario1.value['first_name'];
+    var last_name=formulario1.value['last_name'];
+    var email=formulario1.value['email'];
     return this._http.post<Usuario>('http://piupiuwer.polijunior.com.br/api/usuarios/registrar/',
       {username,
        password,
@@ -33,10 +29,7 @@ export class CadastroServiceProvider {
     })
     .do((usuario:Usuario)=> this._usuarioLogado=usuario);
   }
-
     obtemUsuarioLogado2(){
       return this._usuarioLogado;
     }
-
-
 }

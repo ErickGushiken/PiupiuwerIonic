@@ -1,10 +1,6 @@
 
-<ion-header>
 
-  
-
-</ion-header>
-<!-- Formulario de Login -->
+<!-- LOGO -->
 <ion-content id="conteudo" scroll="false">
   <div class="headerBackground"></div>
   <div class="headerInfo">
@@ -13,26 +9,31 @@
       <h1>Piupiuwer</h1>
       <button ion-button class="infoBotao" icon-only (click)="irParaDocumentacao()">
           <ion-icon name="information"></ion-icon>
-        </button>
+      </button>
     </ion-row>
+
     <ion-row justify-content-center>
       <ion-avatar class="fotoUsuario">
           <img src="./assets/imgs/erickGushiken.jpeg">
       </ion-avatar>
     </ion-row>
   </div>
+
   <!-- Formulario de Login -->
   <div padding id="loginFormulario">
-  <form (ngSubmit)="efetuaLogin()">
-    <ion-item id="usuarioItem">
-      <ion-label stacked>Usuário</ion-label>
-      <ion-input [(ngModel)]="username" name="username" type="text"></ion-input>
-    </ion-item>
-    <ion-item id="senhaItem">
-      <ion-label stacked>Senha</ion-label>
-      <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
-    </ion-item>
-    <button ion-button block type="submit" class="login">Entrar</button>
+    <form (ngSubmit)="efetuaLogin()">
+
+      <ion-item id="usuarioItem" no-lines>
+        <ion-label stacked>Usuário</ion-label>
+        <ion-input [(ngModel)]="username" name="username" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item id="senhaItem">
+        <ion-label stacked>Senha</ion-label>
+        <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+      </ion-item>
+
+      <button ion-button block type="submit" class="login">Entrar</button>
     </form>
   </div>
 
@@ -43,7 +44,6 @@
       Cadastro
     </button>
   </ion-row>
-
 </ion-content>
 
 

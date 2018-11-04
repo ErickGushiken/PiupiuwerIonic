@@ -1,89 +1,80 @@
 page-login{
-p,h1{
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-}
-h1{
-    color: rgb(145, 145, 145);
-}
-
-ion-avatar img {
-    
-    border-radius: 75px;
-    width:150px;
-    height: 150px;
-}
-#conteudo{
-    display: flex !important;
-    align-content: center!important;
-    background-color:rgb(145, 145, 145) !important;
-}
-#piupiuwerLogo{
-    width: 50px;
-    height: auto;
-}
-#logoRow{
-    align-content: center;
-    align-items: center;
-    margin: 4vh;
-}
-.headerBackground {
-    position: relative;
-    background: url('../assets/imgs/abstract.jpg') no-repeat transparent;
-    background-size: cover;
-    height: 40%;
-    z-index: 1;
-    background-repeat: repeat;
-    animation: animatedBackground 7s linear infinite;
-}
-
-@keyframes animatedBackground {
-    from { background-position: 0 0; }
-    to { background-position: 100% 0; }
-}
-.headerInfo{
-    position: relative;
+    p,h1{
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;
+    }
+    h1{
+        color: rgb(145, 145, 145);
+    }
+    ion-avatar img {   
+        border-radius: 75px;
+        width:150px;
+        height: 150px;
+    }
+    #conteudo{
+        display: flex !important;
+        align-content: center!important;
+        background-color:rgb(145, 145, 145) !important;
+    }
+    #piupiuwerLogo{
+        width: 50px;
+        height: auto;
+    }
+    #logoRow{
+        align-content: center;
+        align-items: center;
+        margin: 4vh;
+    }
+    .headerBackground {
+        position: relative;
+        background: url('../assets/imgs/abstract.jpg') no-repeat transparent;
+        background-size: cover;
+        height: 40%;
+        z-index: 1;
+        background-repeat: repeat;
+        animation: animatedBackground 7s linear infinite;
+    }
+    @keyframes animatedBackground {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+    .headerInfo{
+        position: relative;
         z-index: 2;
         margin-top: -280px;
         text-align: center;
-}
-#loginFormulario{
-    
-    color: black !important;
-    margin-top: 5vh;
-    background-color: rgb(145, 145, 145);
-    border-radius: 10px;
-    ion-item{
-        background: rgba(255,255,255,0.4) !important;
-        padding-right: 10px;
-        
-    };
-    ion-input{
-        width: 90%;
     }
-    ion-label{
-        color: black;
-    }
-    #usuarioItem{
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    };
-    #senhaItem{
-        margin-bottom: 2vh;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+    #loginFormulario{
+        color: black !important;
+        margin-top: 5vh;
+        background-color: rgb(145, 145, 145);
+        border-radius: 10px;
+        ion-item{
+            background: rgba(255,255,255,0.4) !important;
+            padding-right: 10px;
+        };
+        ion-input{
+            width: 90%;
+        }
+        ion-label{
+            color: black;
+        }
+        #usuarioItem{
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        };
+        #senhaItem{
+            margin-bottom: 2vh;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
     }
 
-}
-
-.infoBotao{
-    font-size:2em;
-    background: transparent;
-    position: absolute;
-    
-    right: 3vw;
-    
-}
-
+    .infoBotao{
+        font-size:2em;
+        background: transparent;
+        position: absolute;    
+        right: 3vw;
+    }
 }

@@ -1,5 +1,56 @@
+.md ion-title{
+    margin-left: -2em !important;
+}
 page-cadastro {
-    
+    padding: 0px !important;
+    background: #919191;
+    ion-slides{
+        ion-list{
+            border-radius: 50px;
+        }
+        height: 93vh;
+        margin-top: -120px !important;
+        background: #919191;
+    }
+    .ion-content{
+        background: #919191;
+    }
+    h1{
+        color: rgb(145, 145, 145);
+    }
+    .headerBackground {
+        position: relative;
+        background: url('../assets/imgs/abstract.jpg') no-repeat transparent;
+        background-size: cover;
+        height: 20%;
+        z-index: 1;
+        background-repeat: repeat; 
+        animation: animatedBackground 7s linear infinite;
+    }
+    @keyframes animatedBackground {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+    .headerInfo{
+        position: relative;
+        z-index: 1;
+        margin-top: -120px;
+        text-align: center;
+    }
+    #conteudo{
+        display: flex !important;
+        align-content: center!important;
+        background-color:rgb(145, 145, 145) !important;
+    }
+    #piupiuwerLogo{
+        width: 50px;
+        height: auto;
+    }
+    #logoRow{
+        align-content: center;
+        align-items: center;
+        margin: 4vh;
+    }
 }
 .cadastroForm{
     padding: 3rem;
@@ -10,7 +61,6 @@ page-cadastro {
         margin-top: 3vh;
     }
 }
-
 .scroll-content {
     padding-bottom: 0 !important;
 }

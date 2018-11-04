@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController, ActionSheetController } from 'ionic-angular';
 import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
 import { Post } from '../../modelos/post';
 import { HttpClient } from '@angular/common/http';
 import { PostServiceProvider } from '../../providers/post-service/post-service';
-import * as JWT from 'jwt-decode';
 import * as moment from "moment";
 import { SocialSharing } from '@ionic-native/social-sharing';
-/**
- * Generated class for the FriendPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -25,7 +18,8 @@ export class FriendPage {
   public sobrenome:string="";
   public email:string="";
   public username:string="";
-  carregando:any;
+  public carregando:any;
+  public mensagem:any;
   public post:Post;
   public posts: Post[]=[];
   public postsUsuario:Post[]=[];
@@ -33,196 +27,188 @@ export class FriendPage {
   public postsNaoFavoritados:Post[]=[];
   public postsOrganizados:Post[]=[];
   public numeroPius:number;
-  socialSharing: SocialSharing;
+  public socialSharing: SocialSharing;
 
   constructor(public navCtrl: NavController,
-     public navParams: NavParams,
-     private _usuarioService:UsuariosServiceProvider,
-     public loadingCtrl:LoadingController,
-     private _http: HttpClient,
-     private _postService:PostServiceProvider,
-     private _alertCtrl:AlertController,
-     ){
+    private toast:ToastController,
+    private _alertCtrl:AlertController,
+    public navParams: NavParams,
+    private _usuarioService:UsuariosServiceProvider,
+    public loadingCtrl:LoadingController,
+    private _http: HttpClient,
+    private _postService:PostServiceProvider,
+    public actionSheetCtrl: ActionSheetController,
+    )
+    {
       this.username=navParams.get("usuarioUsername");
-      console.log(navParams.get("usuarioUsername"));
-
-     }
+    }
      
-     ionViewWillLoad(){
-      
-  
-    console.log("PÁGINA DO MIGUINHO",this.username);
-    this._usuarioService.procuraUsuario(this.username)
-       .then((result)=>{
+    ionViewWillLoad(){
+      this._usuarioService.procuraUsuario(this.username)
+      .then((result)=>{
         this.nome=result["first_name"];
         this.sobrenome=result["last_name"];
         this.email=result["email"];
         this.id=result["id"];
-        console.log("daskljkdsankdjasndaskjdbasj");
-        console.log(this.username,this.nome,this.sobrenome);
-    
-        
-  });
-  
-}
+      });
+    }
 
-ionViewDidEnter() {
-  console.log("Estou no ionViewWillEnter");
-  this.carregando = this.loadingCtrl.create({
-    content: 'Preparando tudo...'
-  });
-  this.carregando.present();
-
-  this.obtemPiusUsuario(this.username)
-  .then(()=>{setTimeout(()=>{
-    this.carregando.dismiss();
-  },5000);});
-  
+    ionViewDidEnter(){
+      this.carregando = this.loadingCtrl.create({
+        content: 'Preparando tudo...'
+      });
+      this.carregando.present();
+      this.obtemPiusUsuario(this.username)
+      .then(()=>{setTimeout(()=>{
+        this.carregando.dismiss();
+        },5000);
+      });
     };
 
-// Função para deletar Post
-deletaPost(post:Post){
-  console.log("Vou deletar / home.ts");
-  this._postService.deletaPost(post).then(
-    ()=>{
-      // No caso de sucesso
-      this.carregando = this.loadingCtrl.create({
-        content: 'Atualizando posts...'
-      });
-      this.carregando.present();
-      this.obtemPiusUsuario(this.username).then(()=>{setTimeout(()=>{
+    // Função para deletar post
+    deletaPost(post:Post){
+      this._alertCtrl.create({
+        title:"Confirmação",
+        subTitle:"Tem certeza que deseja deletar ?",
+        buttons:[{text:"Cancelar", role:'cancel'},
+        {text:"sim",handler:()=>{
+      this._postService.deletaPost(post)
+      .then(()=>{
+        // No caso de sucesso
+        this.carregando = this.loadingCtrl.create({
+          content: 'Atualizando posts...'
+        });
+        this.carregando.present();
+        this.obtemPiusUsuario(this.username).then(()=>{setTimeout(()=>{
         this.carregando.dismiss();
-      },5000);});;
-      console.log("ATUALIZANDO TUDO");
-
+        this.mensagem=this.toast.create({
+          message: 'Edição feita com sucesso',
+          duration: 3000,
+        });
+        this.mensagem.present();
+        },5000);
+      });
     },()=>{
       // No caso de erro
-      console.log("deu ruim");
-      
     }
-  );
-  
-  
-}
-obtemPiusUsuario(username){
-  this.posts=[];
-  this.postsUsuario=[];
-  this.postsFavoritados=[];
-  this.postsNaoFavoritados=[];
-  this.postsOrganizados=[];
-  var mensagemNPius = document.querySelector('.mensagemNPius');
-  return new Promise((resolve,reject)=>{
-  this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
-  .subscribe(
-    (posts) =>{
-      moment.locale('pt-BR');
-      // Trata cada piu e adiciona informação do username e tempo relativo
-      posts.forEach(post=>{
-        console.log(post,"bora",post.usuario,this._usuarioService.id);
-        if (post.usuario==this.id){
-          this.postsUsuario.push(post);
-          console.log("Coloquei o post do", username,post);
-        }
-      });
-      if (this.postsUsuario.length==0){
-        console.log("sou otario e não postei pius");
-      mensagemNPius.innerHTML="<p>Você ainda não possui pius.</p>";
-    }
-      this.postsUsuario.forEach(post =>{
-      
-        // Para usar o .then a função adicionaAutor no serviço tinha que ser um Promise
-        this._postService.adicionaAutor(post)
-        .then(
-          ()=>{
-            console.log("ESTOU AQUI");
-            posts.forEach(post=>{
-                          
-            this.posts = this.postsUsuario;
-            
-            post.tempoRelativo=moment(post.data).fromNow();
-            this.posts.sort(function(a,b){
-              return (new Date(a.data).getTime())-(new Date(b.data).getTime())
-            });
-                        
-            this.numeroPius=this.posts.length;
-            
-            
+    )}}]
+    }).present();}
+    obtemPiusUsuario(username){
+      this.posts=[];
+      this.postsUsuario=[];
+      this.postsFavoritados=[];
+      this.postsNaoFavoritados=[];
+      this.postsOrganizados=[];
+      var mensagemNPius = document.querySelector('.mensagemNPius');
+      return new Promise((resolve,reject)=>{
+        this._http.get<Post[]>('http://piupiuwer.polijunior.com.br/api/pius/')
+        .subscribe((posts) =>{
+          moment.locale('pt-BR');
 
-            // this.posts=this.posts.reverse();
-            
+          // Seleciona os pius com base no id do usuario
+          posts.forEach(post=>{
+            if (post.usuario==this.id){
+              this.postsUsuario.push(post);
+            }
           });
 
-          
-           
-          
-          
-      });
-      
-        console.log("Separadeeenho", this.postsFavoritados,this.postsNaoFavoritados);
+          // Altera o HTML se não encontrar nenhum piu
+          if (this.postsUsuario.length==0){
+            mensagemNPius.innerHTML="<p>Você ainda não possui pius.</p>";
+          }
 
-        console.log("5646516516515656IODSADIOAJDOASIJDASIODJASO");
-      });
-      console.log("TA FICANDO MT LOKO",this.postsUsuario);
-          this.postsUsuario.forEach(post=>{
-            if(post.favoritado){
-              this.postsFavoritados.push(post);
-            }else{
-              this.postsNaoFavoritados.push(post);
-            }
-          
-
+          // Adiciona o autor e o tempo relativo para cada piu
+          this.postsUsuario.forEach(post =>{
+            this._postService.adicionaAutor(post)
+            .then(()=>{
+              posts.forEach(post=>{ 
+              this.posts = this.postsUsuario;
+              post.tempoRelativo=moment(post.data).fromNow();
+              this.posts.sort(function(a,b){
+                return (new Date(a.data).getTime())-(new Date(b.data).getTime())
+              });  
+              this.numeroPius=this.posts.length;
+            });
+          });
         });
-      console.log("Pius completos");
-      console.log(this.postsFavoritados,"SOU OS FAVORITADOS");
-      console.log(this.postsNaoFavoritados,"SOU OS NAO FAVORITADOS");
-      this.posts=[];
-      this.postsFavoritados.reverse().forEach(post=>{
-        this.postsOrganizados.push(post);
+        
+        // Separa entre posts favoritados e não favoritados
+        this.postsUsuario.forEach(post=>{
+          if(post.favoritado){
+            this.postsFavoritados.push(post);
+          }else{
+            this.postsNaoFavoritados.push(post);
+          }
+        });
+        
+        // Junta os arrays favoritados e não favoritados
+        this.posts=[];
+        this.postsFavoritados.reverse().forEach(post=>{
+          this.postsOrganizados.push(post);
+        });
+        this.postsNaoFavoritados.reverse().forEach(post=>{
+          this.postsOrganizados.push(post);
+        });
+        resolve(this.postsUsuario);
+      },erro=>{
+        reject(erro);
       });
-      this.postsNaoFavoritados.reverse().forEach(post=>{
-        this.postsOrganizados.push(post);
-      })
-      
-      
-      
-      console.log(this.postsOrganizados,"SOLUÇÂO FINAL");
-      
-      resolve(this.postsUsuario);
-    },erro=>{
-      reject(erro);
-    }
-  );
-  })            
+    })            
   }
+
   favoritar(post:Post){
-    
-    this._postService.favoritaPost(post).then(
-      
-      ()=>{
-    
-      console.log("Favoritado");
+    this._postService.favoritaPost(post)
+    .then(()=>{   
       this.carregando = this.loadingCtrl.create({
         content: 'Atualizando posts...'
       });
       this.carregando.present();
-      this.obtemPiusUsuario(this.username).then(()=>{setTimeout(()=>{
-        this.carregando.dismiss();
-      },5000);});;
-      // this._postService.obtemPius();
-
+      this.obtemPiusUsuario(this.username)
+      .then(()=>{
+        setTimeout(()=>{
+          this.carregando.dismiss();
+          this.mensagem=this.toast.create({
+            message: 'Edição feita com sucesso',
+            duration: 3000,
+          });
+          this.mensagem.present();
+        },5000)
+      });
     },()=>{
-      
     });
   }
-// Função para compartilhar no whats
-compartilhaWhats(post:Post){
-  var msg = post.conteudo;
-  this.socialSharing.shareViaWhatsApp(msg,null,null);
-  console.log("compartilhei");
-}
-
-
-
-
-
+  // Função para compartilhar no whats
+  compartilhaWhats(post:Post){
+    var msg = post.conteudo;
+    this.socialSharing.shareViaWhatsApp(msg,null,null);
+  }
+  menuOpcoes(post:Post){
+    const acao = this.actionSheetCtrl.create({
+      title: 'Opções',
+      buttons: [
+        {
+          text: 'Deletar',
+          handler: () => {
+            this.deletaPost(post);
+          }
+        },{
+          text: 'Favoritar',
+          handler: () => {
+            this.favoritar(post);
+          }
+        },{
+          text: 'WhatsApp',
+          handler: () => {
+            this.compartilhaWhats(post);
+          }
+        },{
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    acao.present();
+  }
 }
