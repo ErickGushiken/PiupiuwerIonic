@@ -51,7 +51,7 @@ export class PostServiceProvider {
         this.usuarios = usuarios;
         // Função que adiciona informações relevantes para o card, como tempo relativo e nome de usuario
         this.usuarios.forEach(usuario => {
-          if(usuario.id==post.usuario){
+          if(usuario.id==post.usuario.id){
             post.autor=usuario.username;
             return
           }

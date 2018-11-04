@@ -107,7 +107,7 @@ export class FriendPage {
 
           // Seleciona os pius com base no id do usuario
           posts.forEach(post=>{
-            if (post.usuario==this.id){
+            if (post.usuario.id==this.id){
               this.postsUsuario.push(post);
             }
           });
