@@ -192,6 +192,7 @@ export class HomePage {
   criaPost(){
     var novoPostCard = document.querySelector('.formCard');
     var contador = document.querySelector('.contador');
+    console.log(this._usuarioService.id);
     let post={
       conteudo:this.conteudoPost,
       usuario:this._usuarioService.id,
